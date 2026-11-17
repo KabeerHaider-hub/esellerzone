@@ -95,7 +95,7 @@ export function HorizontalServices({ services }: { services: Service[] }) {
               <Link
                 key={s.slug}
                 href={`/services/${s.slug}/`}
-                className="group relative flex h-[420px] w-[380px] shrink-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-white/[0.01] p-8 transition hover:border-brand-500/50"
+                className="group relative flex h-[420px] w-[380px] shrink-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-ink-900/60 p-8 backdrop-blur-md transition hover:border-brand-500/50"
               >
                 <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-500/0 blur-3xl transition duration-500 group-hover:bg-brand-500/30" />
                 <div className="flex items-center justify-between">

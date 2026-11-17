@@ -62,7 +62,8 @@ void main(){
   gl_FragColor = vec4(col, glow*vAlpha);
 }`;
 
-export function HeroScene() {
+export function HeroScene({ mode = "hero" }: { mode?: "hero" | "fixed" }) {
+  const fixed = mode === "fixed";
   const mount = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -155,7 +156,9 @@ export function HeroScene() {
       const wide = w >= 1024;
       group.position.set(wide ? 2.5 : 0, wide ? 0 : 0.9, 0);
       group.scale.setScalar(wide ? 1 : 0.78);
+      base.x = group.position.x; base.y = group.position.y; base.s = group.scale.x;
     };
+    const base = { x: 0, y: 0, s: 1 };
     resize();
     const ro = new ResizeObserver(resize);
     ro.observe(el);
@@ -167,25 +170,46 @@ export function HeroScene() {
     };
     window.addEventListener("pointermove", onMove);
 
-    let scrollT = 0;
-    const onScroll = () => { scrollT = Math.min(1, window.scrollY / (window.innerHeight * 0.9)); };
+    let scrollT = 0;   // hero mode: 0..1 over the first screen (drives the scatter)
+    let pageT = 0;     // fixed mode: 0..1 over the whole page (drives the journey)
+    const onScroll = () => {
+      scrollT = Math.min(1, window.scrollY / (window.innerHeight * 0.9));
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      pageT = Math.min(1, window.scrollY / max);
+    };
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
 
     let visible = true;
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; });
+    const io = new IntersectionObserver(([e]) => { visible = fixed || e.isIntersecting; });
     io.observe(el);
 
     const clock = new THREE.Clock();
     let raf = 0;
+    let journey = 0, heroFade = 0;
     const tick = () => {
       raf = requestAnimationFrame(tick);
       if (!visible) return;
       const t = clock.getElapsedTime();
       uniforms.uTime.value = reduce ? 0 : t;
-      uniforms.uScroll.value += (scrollT - uniforms.uScroll.value) * 0.08;
+      if (fixed) {
+        // The planet travels with the visitor: right -> left -> right, breathing as it goes.
+        journey += (pageT - journey) * 0.06;
+        heroFade += (scrollT - heroFade) * 0.06;
+        const wide = el.clientWidth >= 1024;
+        const a = journey * Math.PI * 2;
+        group.position.x = wide ? base.x * Math.cos(a) : Math.sin(a) * 0.6;
+        group.position.y = base.y + Math.sin(a * 1.5) * (wide ? 0.35 : 0.5) - (wide ? 0 : heroFade * 0.9);
+        group.scale.setScalar(base.s * (1 + Math.sin(journey * Math.PI) * 0.22));
+        planet.rotation.x = journey * Math.PI * 0.8;
+        uniforms.uScroll.value = Math.sin(journey * Math.PI * 6) * 0.04 + 0.02;
+        renderer.domElement.style.opacity = String(1 - heroFade * 0.4);
+      } else {
+        uniforms.uScroll.value += (scrollT - uniforms.uScroll.value) * 0.08;
+      }
       mouse.x += (mouse.tx - mouse.x) * 0.05;
       mouse.y += (mouse.ty - mouse.y) * 0.05;
-      planet.rotation.y = t * 0.08;
+      planet.rotation.y = t * 0.08 + (fixed ? journey * Math.PI * 1.5 : 0);
       rings.rotation.z = -0.35 + t * 0.05;
       ring2.rotation.y = -t * 0.04;
       group.rotation.x = mouse.y * 0.25;
