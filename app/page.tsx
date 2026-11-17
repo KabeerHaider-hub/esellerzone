@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { Particles } from "@/components/Particles";
-import { HeroVisual } from "@/components/HeroVisual";
+import { HeroScene } from "@/components/HeroScene";
+import { HeroCopy, FadeIn } from "@/components/HeroCopy";
+import { SplitReveal, Magnetic, KineticBand, ScaleIn } from "@/components/Experience";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 import { SectionHeading, ServiceCard, CtaBand, ProcessSteps } from "@/components/Sections";
 import { Spotlight } from "@/components/Spotlight";
 import { services } from "@/lib/services";
-import { HeroParallax, ScrollText, HorizontalServices, CountUp, Parallax } from "@/components/ScrollFx";
+import { ScrollText, HorizontalServices, CountUp, Parallax } from "@/components/ScrollFx";
 import { projects, faqs, posts } from "@/lib/content";
 
 const marketplaces = ["Amazon", "Walmart", "eBay", "TikTok Shop", "Shopify", "Etsy", "Google Ads", "Meta Ads", "WooCommerce", "Next.js"];
@@ -35,31 +36,43 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="relative min-h-[100svh] overflow-hidden pt-32 sm:pt-36">
-        <div className="grid-bg pointer-events-none absolute inset-0 animate-grid-pan [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]" />
-        <Particles />
-        <div className="pointer-events-none absolute -left-40 top-20 h-[480px] w-[480px] rounded-full bg-brand-500/20 blur-[140px]" />
-        <div className="pointer-events-none absolute -right-40 bottom-0 h-[420px] w-[420px] rounded-full bg-brand-700/20 blur-[140px]" />
+      <section className="relative overflow-hidden">
+        <div className="relative flex min-h-[100svh] flex-col">
+          <div className="grid-bg pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_70%_50%,black_10%,transparent_70%)]" />
+          <div className="pointer-events-none absolute right-[-10%] top-1/2 h-[700px] w-[700px] -translate-y-1/2 rounded-full bg-brand-500/[0.12] blur-[160px]" />
+          <HeroScene />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/60 to-transparent lg:via-ink-950/30" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-950 to-transparent" />
 
-        <HeroParallax
-          copy={<Reveal>
-            <span className="eyebrow"><Icon name="spark" className="h-3.5 w-3.5" /> E-commerce & digital growth agency</span>
-            <h1 className="h-display mt-7 text-[2.6rem] leading-[1.02] sm:text-6xl lg:text-7xl">
-              We grow your business, <span className="text-gradient">not your expenses.</span>
+          <HeroCopy>
+            <FadeIn delay={0.2}><span className="eyebrow">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-500" /> E-commerce & digital growth agency
+            </span></FadeIn>
+            <h1 className="h-display mt-8 text-[2.9rem] leading-[0.98] sm:text-7xl lg:text-[6.2rem]">
+              <SplitReveal text="We grow your business," delay={0.15} />
+              <br />
+              <SplitReveal text="not your expenses." delay={0.55} accentFrom={0} />
             </h1>
-            <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/60">
-              Marketplaces, stores, websites, AI and marketing, run by one team that only wins when you do. Our success is tied to yours.
-            </p>
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact/" className="btn-primary">Book a free strategy call <Icon name="arrow" className="h-4 w-4" /></Link>
-              <Link href="/services/" className="btn-ghost">See what we do</Link>
+            <FadeIn delay={1.1} className="mt-8 max-w-xl text-lg leading-relaxed text-white/60">
+              Marketplaces, stores, websites, AI and marketing, run by one team that only wins when you do.
+            </FadeIn>
+            <FadeIn delay={1.3} className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <Magnetic><Link href="/contact/" className="btn-primary">Book a free strategy call <Icon name="arrow" className="h-4 w-4" /></Link></Magnetic>
+              <Magnetic><Link href="/services/" className="btn-ghost">Explore services</Link></Magnetic>
+            </FadeIn>
+          </HeroCopy>
+
+          <div className="container-x relative mt-auto flex items-end justify-between pb-10">
+            <div className="flex items-center gap-4 text-[11px] uppercase tracking-[0.3em] text-white/40">
+              <span className="scroll-cue relative block h-12 w-px overflow-hidden bg-white/15" /> Scroll
             </div>
-            <div className="mt-12 flex items-center gap-4 text-xs uppercase tracking-[0.25em] text-white/35">
-              <span className="h-px w-10 bg-white/20" /> Scroll to explore
+            <div className="hidden gap-10 text-right text-xs text-white/40 sm:flex">
+              <p><span className="block font-display text-2xl text-white">11</span>services</p>
+              <p><span className="block font-display text-2xl text-white">6+</span>platforms</p>
+              <p><span className="block font-display text-2xl text-white">24h</span>reply time</p>
             </div>
-          </Reveal>}
-          visual={<Reveal delay={0.15}><HeroVisual /></Reveal>}
-        />
+          </div>
+        </div>
 
         {/* marquee */}
         <div className="relative border-y border-white/10 bg-ink-900/60 py-5 backdrop-blur">
@@ -118,6 +131,8 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      <KineticBand words={["Sell", "Build", "Grow", "Automate"]} />
 
       {/* SERVICES: pinned horizontal scroll on desktop */}
       <div className="mt-24"><HorizontalServices services={services} /></div>

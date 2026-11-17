@@ -5,6 +5,7 @@ import { Icon } from "./Icon";
 import { Spotlight } from "./Spotlight";
 import type { Service } from "@/lib/services";
 import { ScrollLine } from "./ScrollFx";
+import { ScaleIn, Magnetic } from "./Experience";
 
 export function SectionHeading({ eyebrow, title, text, center = false }: { eyebrow: string; title: ReactNode; text?: string; center?: boolean }) {
   return (
@@ -58,20 +59,20 @@ export function ServiceCard({ s, i = 0 }: { s: Service; i?: number }) {
 export function CtaBand({ title = "Ready to grow without growing your expenses?", text = "Book a free 20-minute strategy call. We'll audit your store or site and show you the three fastest wins, no strings attached." }: { title?: string; text?: string }) {
   return (
     <section className="container-x mt-28">
-      <Reveal>
-        <div className="relative overflow-hidden rounded-3xl border border-brand-500/30 bg-gradient-to-br from-brand-500/20 via-ink-800 to-ink-900 px-6 py-16 text-center sm:px-16">
+      <ScaleIn>
+        <div className="relative overflow-hidden border border-brand-500/30 bg-gradient-to-br from-brand-500/20 via-ink-800 to-ink-900 px-6 py-20 text-center sm:px-16 sm:py-28">
           <div className="grid-bg pointer-events-none absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
           <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-500/40 blur-[100px]" />
           <div className="relative">
             <h2 className="h-display mx-auto max-w-3xl text-3xl sm:text-5xl">{title}</h2>
             <p className="mx-auto mt-5 max-w-2xl text-white/65">{text}</p>
             <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link href="/contact/" className="btn-primary">Book a free strategy call <Icon name="arrow" className="h-4 w-4" /></Link>
-              <Link href="/services/" className="btn-ghost">Explore services</Link>
+              <Magnetic><Link href="/contact/" className="btn-primary">Book a free strategy call <Icon name="arrow" className="h-4 w-4" /></Link></Magnetic>
+              <Magnetic><Link href="/services/" className="btn-ghost">Explore services</Link></Magnetic>
             </div>
           </div>
         </div>
-      </Reveal>
+      </ScaleIn>
     </section>
   );
 }
