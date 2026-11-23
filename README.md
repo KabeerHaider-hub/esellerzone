@@ -32,3 +32,9 @@ Every push to `main` runs `.github/workflows/deploy.yml`, which builds the site 
 `NEXT_PUBLIC_BASE_PATH=/<repo-name>` and publishes it to
 https://kabeerhaider-hub.github.io/esellerzone/
 (Settings → Pages → Source must be set to **GitHub Actions**.)
+
+## Deploy on Vercel
+1. In Vercel: **Add New → Project → Import** `KabeerHaider-hub/esellerzone`. Keep the defaults (Framework: Next.js) and click **Deploy**.
+2. Option 1 is the home page; Option 2 is at `/v2/`.
+3. Want Option 2 as its own site? Import the same repo a second time as another project and add the
+   environment variable `NEXT_PUBLIC_HOME_VARIANT` = `cosmic` before deploying.
