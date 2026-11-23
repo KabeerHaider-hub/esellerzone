@@ -1,4 +1,6 @@
+"use client";
 import Link from "next/link";
+import { useHomeHref } from "./useHomeHref";
 
 export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
   return (
@@ -17,8 +19,9 @@ export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
 }
 
 export function Logo({ className = "" }: { className?: string }) {
+  const home = useHomeHref();
   return (
-    <Link href="/" className={`group inline-flex items-center gap-2.5 ${className}`} aria-label="eSeller Zone home">
+    <Link href={home} className={`group inline-flex items-center gap-2.5 ${className}`} aria-label="eSeller Zone home">
       <LogoMark className="h-9 w-9 transition-transform duration-500 group-hover:rotate-[-8deg]" />
       <span className="font-display text-[1.05rem] font-semibold leading-none tracking-[0.14em] text-white">
         SELLER<span className="ml-1.5 text-brand-500">ZONE</span>
