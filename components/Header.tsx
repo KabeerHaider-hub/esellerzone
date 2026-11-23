@@ -23,7 +23,7 @@ export function Header() {
   }, []);
   useEffect(() => setOpen(false), [path]);
 
-  const isActive = (href: string) => (href === "/" || href === "/v2/" ? path === "/" || !!path?.startsWith("/v2") : !!path?.startsWith(href.replace(/\/$/, "")));
+  const isActive = (href: string) => (href === "/" || href === "/v1/" ? path === "/" || !!path?.startsWith("/v1") || !!path?.startsWith("/v2") : !!path?.startsWith(href.replace(/\/$/, "")));
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-4">

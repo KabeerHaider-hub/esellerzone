@@ -35,6 +35,5 @@ https://kabeerhaider-hub.github.io/esellerzone/
 
 ## Deploy on Vercel
 1. In Vercel: **Add New → Project → Import** `KabeerHaider-hub/esellerzone`. Keep the defaults (Framework: Next.js) and click **Deploy**.
-2. Option 1 is the home page; Option 2 is at `/v2/`.
-3. Want Option 2 as its own site? Import the same repo a second time as another project and add the
-   environment variable `NEXT_PUBLIC_HOME_VARIANT` = `cosmic` before deploying.
+2. The home page is Option 2 (3D planet behind the whole page). Option 1 is kept at `/v1/`.
+3. To make Option 1 the home page instead, add the environment variable `NEXT_PUBLIC_HOME_VARIANT` = `classic`.

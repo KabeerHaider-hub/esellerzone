@@ -1,8 +1,8 @@
 import { HomePage } from "@/components/HomePage";
 
-// NEXT_PUBLIC_HOME_VARIANT=cosmic makes Option 2 (planet behind the whole page) the main home page.
-// Leave it unset for Option 1. Option 2 is also always available at /v2/.
-const variant = process.env.NEXT_PUBLIC_HOME_VARIANT === "cosmic" ? "cosmic" : "classic";
+// Main home page: the 3D planet stays behind the whole page (Option 2).
+// Set NEXT_PUBLIC_HOME_VARIANT=classic to switch back to Option 1. Option 1 also lives at /v1/.
+const variant = process.env.NEXT_PUBLIC_HOME_VARIANT === "classic" ? "classic" : "cosmic";
 
 export default function Home() {
   return <HomePage variant={variant} />;

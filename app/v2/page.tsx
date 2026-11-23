@@ -1,12 +1,9 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/HomePage";
 
-export const metadata: Metadata = {
-  title: "Home (Option 2)",
-  robots: { index: false }, // demo variant: keep it out of search results
-};
+export const metadata: Metadata = { title: "Home (Option 2)", robots: { index: false } };
 
-// Option 2: the particle planet stays fixed behind the whole home page and travels as you scroll.
+// Kept so old /v2/ links still work; the main home page now shows this same design.
 export default function HomeV2() {
   return <HomePage variant="cosmic" />;
 }
