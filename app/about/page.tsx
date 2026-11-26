@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { PageHero, SectionHeading, CtaBand, ProcessSteps } from "@/components/Sections";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
-import { LogoMark } from "@/components/Logo";
+import { LogoStacked } from "@/components/Logo";
+import { PartnerCard } from "@/components/PartnerCard";
 
 export const metadata: Metadata = {
   title: "About",
@@ -29,7 +30,7 @@ export default function About() {
           <div className="relative mx-auto aspect-square max-w-md">
             <div className="grid-bg absolute inset-0 rounded-3xl border border-white/10 [mask-image:radial-gradient(circle,black,transparent_75%)]" />
             <div className="absolute inset-[18%] rounded-full bg-brand-500/25 blur-3xl" />
-            <LogoMark className="absolute inset-[25%] h-1/2 w-1/2 animate-float" />
+            <div className="absolute inset-0 grid place-items-center"><LogoStacked className="h-auto w-[55%] animate-float" /></div>
           </div>
         </Reveal>
         <div>
@@ -57,6 +58,10 @@ export default function About() {
       <section className="container-x mt-28">
         <SectionHeading eyebrow="How we work" title={<>Three phases. <span className="text-gradient">Zero guesswork.</span></>} />
         <ProcessSteps steps={["Discovery & strategy", "Design & development", "Integration & QA", "Launch & support", "Optimisation"]} />
+      </section>
+
+      <section className="container-x mt-28">
+        <PartnerCard />
       </section>
 
       {/* TODO(owner): add real team members and photos here when ready. */}

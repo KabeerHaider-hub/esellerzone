@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-  --brand: 245 130 32;
+  --brand: 255 89 13;
 }
 
 html { scroll-behavior: smooth; }
@@ -20,7 +20,7 @@ body {
   }
   .h-display { @apply font-display font-semibold tracking-tight text-white; }
   .text-gradient {
-    background: linear-gradient(100deg, #fff 10%, #FFC995 45%, #F58220 85%);
+    background: linear-gradient(100deg, #fff 10%, #FFB08A 45%, #FF590D 85%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .glass {
@@ -75,7 +75,7 @@ html.lenis, html.lenis body { height: auto; }
 
 .scroll-cue::after {
   content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 40%;
-  background: linear-gradient(to bottom, transparent, #F58220);
+  background: linear-gradient(to bottom, transparent, #FF590D);
   animation: cue 1.8s cubic-bezier(.65,0,.35,1) infinite;
 }
 @keyframes cue { 0% { transform: translateY(-100%); } 100% { transform: translateY(250%); } }

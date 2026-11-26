@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
 import Lenis from "lenis";
-import { LogoMark } from "./Logo";
+import { LogoStacked } from "./Logo";
 
 /** Buttery smooth scrolling (native scroll position, so scroll animations keep working). */
 export function SmoothScroll() {
@@ -49,13 +49,13 @@ export function Preloader() {
           transition={{ duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
         >
           <motion.div initial={{ scale: 0.6, opacity: 0, rotate: -20 }} animate={{ scale: 1, opacity: 1, rotate: 0 }} transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}>
-            <LogoMark className="h-20 w-20 drop-shadow-[0_0_30px_rgba(245,130,32,0.6)]" />
+            <LogoStacked className="h-36 w-auto drop-shadow-[0_0_30px_rgba(255,89,13,0.45)]" />
           </motion.div>
           <div className="mt-10 h-px w-56 overflow-hidden bg-white/10">
-            <div className="h-full bg-brand-500 shadow-[0_0_12px_rgba(245,130,32,1)]" style={{ width: `${n}%` }} />
+            <div className="h-full bg-brand-500 shadow-[0_0_12px_rgba(255,89,13,1)]" style={{ width: `${n}%` }} />
           </div>
           <p className="mt-5 font-display text-sm tabular-nums tracking-[0.4em] text-white/50">{String(n).padStart(3, "0")}</p>
-          <p className="absolute bottom-10 font-display text-xs tracking-[0.5em] text-white/30">ESELLER ZONE</p>
+          
         </motion.div>
       )}
     </AnimatePresence>
@@ -87,7 +87,7 @@ export function Cursor() {
       if (ring.current) {
         const s = (hover ? 1.9 : 1) * (down ? 0.8 : 1);
         ring.current.style.transform = `translate3d(${r.x}px,${r.y}px,0) translate(-50%,-50%) scale(${s})`;
-        ring.current.style.backgroundColor = hover ? "rgba(245,130,32,0.12)" : "transparent";
+        ring.current.style.backgroundColor = hover ? "rgba(255,89,13,0.12)" : "transparent";
       }
       raf = requestAnimationFrame(loop);
     };
@@ -108,7 +108,7 @@ export function Cursor() {
   return (
     <>
       <div ref={ring} className="pointer-events-none fixed left-0 top-0 z-[90] h-9 w-9 rounded-full border border-brand-500/70 transition-[background-color] duration-200" />
-      <div ref={dot} className="pointer-events-none fixed left-0 top-0 z-[91] h-1.5 w-1.5 rounded-full bg-brand-400 shadow-[0_0_10px_2px_rgba(245,130,32,0.9)]" />
+      <div ref={dot} className="pointer-events-none fixed left-0 top-0 z-[91] h-1.5 w-1.5 rounded-full bg-brand-400 shadow-[0_0_10px_2px_rgba(255,89,13,0.9)]" />
     </>
   );
 }

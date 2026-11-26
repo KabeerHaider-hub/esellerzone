@@ -78,7 +78,7 @@ export default async function ServicePage({ params }: Props) {
               const featured = i === 1;
               return (
                 <Reveal key={p.name} delay={i * 0.08}>
-                  <div className={`relative h-full rounded-3xl border p-8 ${featured ? "border-brand-500/60 bg-gradient-to-b from-brand-500/15 to-ink-900 shadow-[0_0_60px_-20px_rgba(245,130,32,0.7)]" : "border-white/10 bg-white/[0.03]"}`}>
+                  <div className={`relative h-full rounded-3xl border p-8 ${featured ? "border-brand-500/60 bg-gradient-to-b from-brand-500/15 to-ink-900 shadow-[0_0_60px_-20px_rgba(255,89,13,0.7)]" : "border-white/10 bg-white/[0.03]"}`}>
                     {featured && <span className="absolute -top-3 left-8 rounded-full bg-brand-500 px-3 py-1 text-xs font-semibold text-ink-950">Most popular</span>}
                     <h3 className="font-display text-xl font-semibold text-white">{p.name}</h3>
                     <p className="mt-1 text-sm text-white/50">{p.note}</p>

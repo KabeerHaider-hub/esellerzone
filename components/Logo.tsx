@@ -1,31 +1,27 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import { useHomeHref } from "./useHomeHref";
+import icon from "@/public/brand/logo-icon.png";
+import lockup from "@/public/brand/logo-lockup.png";
+import stacked from "@/public/brand/logo-stacked.png";
 
-export function LogoMark({ className = "h-9 w-9" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
-      <defs>
-        <linearGradient id="ez-grad" x1="10" y1="10" x2="58" y2="58" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#FFB15C" />
-          <stop offset="1" stopColor="#F26A1B" />
-        </linearGradient>
-      </defs>
-      <path d="M11 33H53A21 21 0 1 0 40.5 52.2" stroke="#fff" strokeWidth="6.5" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M21 26.5A11 11 0 0 1 43 26.5Z" fill="url(#ez-grad)" />
-      <rect x="47" y="44" width="11" height="11" rx="2.2" transform="rotate(45 52.5 49.5)" fill="url(#ez-grad)" />
-    </svg>
-  );
+/** Official eSeller Zone "e" mark (no wordmark). */
+export function LogoMark({ className = "h-9 w-auto" }: { className?: string }) {
+  return <Image src={icon} alt="" aria-hidden="true" className={className} priority />;
 }
 
+/** Official stacked logo: mark above the SELLER ZONE wordmark. */
+export function LogoStacked({ className = "h-28 w-auto" }: { className?: string }) {
+  return <Image src={stacked} alt="eSeller Zone" className={className} />;
+}
+
+/** Header/footer logo: the official mark and wordmark side by side. */
 export function Logo({ className = "" }: { className?: string }) {
   const home = useHomeHref();
   return (
-    <Link href={home} className={`group inline-flex items-center gap-2.5 ${className}`} aria-label="eSeller Zone home">
-      <LogoMark className="h-9 w-9 transition-transform duration-500 group-hover:rotate-[-8deg]" />
-      <span className="font-display text-[1.05rem] font-semibold leading-none tracking-[0.14em] text-white">
-        SELLER<span className="ml-1.5 text-brand-500">ZONE</span>
-      </span>
+    <Link href={home} className={`group inline-flex items-center ${className}`} aria-label="eSeller Zone home">
+      <Image src={lockup} alt="eSeller Zone" priority className="h-9 w-auto transition duration-500 group-hover:drop-shadow-[0_0_14px_rgba(255,89,13,0.6)] sm:h-10" />
     </Link>
   );
 }

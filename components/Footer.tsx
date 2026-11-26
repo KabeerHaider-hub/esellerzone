@@ -41,7 +41,12 @@ export function Footer() {
           <h3 className="text-sm font-semibold text-white">Get in touch</h3>
           <ul className="mt-4 space-y-3 text-sm text-white/60">
             <li className="flex gap-3"><Icon name="mail" className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" /><a href={`mailto:${site.email}`} className="hover:text-white">{site.email}</a></li>
-            <li className="flex gap-3"><Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />{site.address}</li>
+            {site.offices.map((o) => (
+              <li key={o.label} className="flex gap-3">
+                <Icon name="pin" className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />
+                <span><span className="block text-white/80">{o.label}</span>{o.address}{o.phone && <a href={`tel:${o.phone.replace(/[^+\d]/g, "")}`} className="mt-1 block hover:text-white">{o.phone}</a>}</span>
+              </li>
+            ))}
             <li className="flex gap-3"><Icon name="clock" className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />{site.hours}</li>
           </ul>
         </div>
@@ -49,6 +54,7 @@ export function Footer() {
       <div className="border-t border-white/5">
         <div className="container-x flex flex-col items-center justify-between gap-2 py-6 text-xs text-white/40 sm:flex-row">
           <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>Partner company: <a href={site.partner.url} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-brand-400">{site.partner.name}</a></p>
           <p>Built for growth. Engineered for the future.</p>
         </div>
       </div>

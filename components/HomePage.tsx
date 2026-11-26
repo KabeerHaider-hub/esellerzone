@@ -8,7 +8,8 @@ import { SectionHeading, ServiceCard, CtaBand, ProcessSteps } from "@/components
 import { Spotlight } from "@/components/Spotlight";
 import { services } from "@/lib/services";
 import { ScrollText, HorizontalServices, CountUp, Parallax } from "@/components/ScrollFx";
-import { projects, faqs, posts } from "@/lib/content";
+import { faqs, posts } from "@/lib/content";
+import { chapters } from "@/lib/portfolio";
 
 const marketplaces = ["Amazon", "Walmart", "eBay", "TikTok Shop", "Shopify", "Etsy", "Google Ads", "Meta Ads", "WooCommerce", "Next.js"];
 
@@ -182,20 +183,22 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
       {/* WORK */}
       <section className="container-x mt-16">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading eyebrow="Selected work" title={<>Brands we&apos;ve <span className="text-gradient">helped grow.</span></>} />
-          <Reveal><Link href="/portfolio/" className="btn-ghost shrink-0">View portfolio <Icon name="arrow" className="h-4 w-4" /></Link></Reveal>
+          <SectionHeading eyebrow="Portfolio" title={<>Explore our work, <span className="text-gradient">chapter by chapter.</span></>} />
+          <Reveal><Link href="/portfolio/" className="btn-ghost shrink-0">Enter the portfolio <Icon name="arrow" className="h-4 w-4" /></Link></Reveal>
         </div>
         <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {projects.slice(0, 3).map((p, i) => (
-            <Parallax key={p.client} speed={[30, 70, 45][i]}>
+          {chapters.slice(0, 3).map((c, i) => (
+            <Parallax key={c.slug} speed={[30, 70, 45][i]}>
               <Spotlight className="glass h-full p-7">
-                <div className="relative">
-                  <div className="grid aspect-[16/10] place-items-center rounded-xl border border-white/10 bg-gradient-to-br from-brand-500/20 via-ink-800 to-ink-900">
-                    <span className="font-display text-2xl font-semibold text-white/80">{p.client}</span>
+                <Link href={`/portfolio/${c.slug}/`} className="relative block">
+                  <div className="relative grid aspect-[16/10] place-items-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-brand-500/20 via-ink-800 to-ink-900">
+                    <div className="grid-bg absolute inset-0 opacity-50" />
+                    <span className="relative font-mono text-4xl font-semibold tracking-[0.2em] text-white/80">{c.code}</span>
                   </div>
-                  <p className="mt-6 text-xs uppercase tracking-[0.2em] text-brand-400">{p.tag}</p>
-                  <h3 className="mt-2 font-display text-lg font-semibold text-white">{p.title}</h3>
-                </div>
+                  <p className="mt-6 font-mono text-xs tracking-[0.25em] text-brand-400">{String(i + 1).padStart(2, "0")} · CHAPTER</p>
+                  <h3 className="mt-2 font-display text-lg font-semibold text-white">{c.title}</h3>
+                  <p className="mt-2 text-sm text-white/55">{c.tagline}</p>
+                </Link>
               </Spotlight>
             </Parallax>
           ))}

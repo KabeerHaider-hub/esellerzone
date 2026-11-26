@@ -57,7 +57,7 @@ void main(){
   if(d>0.5) discard;
   float glow = smoothstep(0.5, 0.0, d);
   vec3 white = vec3(1.0, 0.93, 0.86);
-  vec3 orange = vec3(0.96, 0.51, 0.13);
+  vec3 orange = vec3(1.0, 0.35, 0.05);
   vec3 col = mix(white*0.75, orange, vMix);
   gl_FragColor = vec4(col, glow*vAlpha);
 }`;
@@ -117,7 +117,7 @@ export function HeroScene({ mode = "hero" }: { mode?: "hero" | "fixed" }) {
     group.add(planet);
 
     // --- orbital rings
-    const ringMat = (opacity: number) => new THREE.PointsMaterial({ color: 0xf58220, size: 0.018, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending });
+    const ringMat = (opacity: number) => new THREE.PointsMaterial({ color: 0xff590d, size: 0.018, transparent: true, opacity, depthWrite: false, blending: THREE.AdditiveBlending });
     const makeRing = (radius: number, n: number, spread: number, opacity: number) => {
       const p = new Float32Array(n * 3);
       for (let i = 0; i < n; i++) {

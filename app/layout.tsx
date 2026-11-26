@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: { default: `${site.name} | E-Commerce & Digital Growth Agency`, template: `%s | ${site.name}` },
   description: site.description,
-  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logo-mark.svg` },
+  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/brand/favicon.png` },
   openGraph: { type: "website", siteName: site.name, title: site.name, description: site.description },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     name: site.name,
     url: site.domain,
     email: site.email,
-    logo: `${site.domain}/logo-mark.svg`,
+    logo: `${site.domain}/brand/logo-stacked.png`,
     sameAs: site.socials.map((s) => s.href),
   };
   return (

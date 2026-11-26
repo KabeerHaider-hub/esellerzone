@@ -4,15 +4,16 @@ import { ContactForm } from "@/components/ContactForm";
 import { Reveal } from "@/components/Reveal";
 import { Icon, type AnyIcon } from "@/components/Icon";
 import { site } from "@/lib/site";
+import { PartnerCard } from "@/components/PartnerCard";
 
 export const metadata: Metadata = { title: "Contact", description: "Talk to eSeller Zone about marketplaces, e-commerce, websites, apps, AI, SEO and marketing." };
 
 export default function Contact() {
   const items: { icon: AnyIcon; label: string; value: string; href?: string }[] = [
     { icon: "mail", label: "Email", value: site.email, href: `mailto:${site.email}` },
-    ...(site.phone ? [{ icon: "phone" as AnyIcon, label: "Phone", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` }] : []),
+    ...site.offices.filter((o) => o.phone).map((o) => ({ icon: "phone" as AnyIcon, label: `Phone · ${o.city}`, value: o.phone, href: `tel:${o.phone.replace(/[^+\d]/g, "")}` })),
     ...(site.whatsapp ? [{ icon: "chat" as AnyIcon, label: "WhatsApp", value: `+${site.whatsapp}`, href: `https://wa.me/${site.whatsapp}` }] : []),
-    { icon: "pin", label: "Office", value: site.address },
+    ...site.offices.map((o) => ({ icon: "pin" as AnyIcon, label: o.label, value: o.address })),
     { icon: "clock", label: "Hours", value: site.hours },
   ];
   return (
@@ -33,6 +34,9 @@ export default function Contact() {
           ))}
         </div>
         <Reveal delay={0.1}><ContactForm /></Reveal>
+      </section>
+      <section className="container-x mt-10">
+        <PartnerCard />
       </section>
     </>
   );

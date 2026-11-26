@@ -84,7 +84,7 @@ export function ProcessSteps({ steps }: { steps: string[] }) {
       {steps.map((step, i) => (
         <Reveal key={step} delay={i * 0.08}>
           <li className="relative">
-            <div className="relative z-10 grid h-14 w-14 place-items-center rounded-2xl border border-brand-500/40 bg-ink-900 font-display text-lg font-semibold text-brand-400 shadow-[0_0_30px_-8px_rgba(245,130,32,0.7)]">
+            <div className="relative z-10 grid h-14 w-14 place-items-center rounded-2xl border border-brand-500/40 bg-ink-900 font-display text-lg font-semibold text-brand-400 shadow-[0_0_30px_-8px_rgba(255,89,13,0.7)]">
               {String(i + 1).padStart(2, "0")}
             </div>
             <p className="mt-5 font-medium text-white">{step}</p>

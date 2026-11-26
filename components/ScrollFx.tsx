@@ -12,7 +12,7 @@ export function ScrollProgress() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600 shadow-[0_0_12px_rgba(245,130,32,0.8)]"
+      className="fixed inset-x-0 top-0 z-[60] h-[2px] origin-left bg-gradient-to-r from-brand-300 via-brand-500 to-brand-600 shadow-[0_0_12px_rgba(255,89,13,0.8)]"
     />
   );
 }
@@ -115,7 +115,7 @@ export function HorizontalServices({ services }: { services: Service[] }) {
           </motion.div>
           <div className="container-x mt-12">
             <div className="h-px w-full bg-white/10">
-              <motion.div style={{ width: bar }} className="h-px bg-brand-500 shadow-[0_0_10px_rgba(245,130,32,0.9)]" />
+              <motion.div style={{ width: bar }} className="h-px bg-brand-500 shadow-[0_0_10px_rgba(255,89,13,0.9)]" />
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@ export function ScrollLine({ children }: { children: ReactNode }) {
   return (
     <div ref={ref} className="relative">
       <div className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px bg-white/10 md:block" />
-      <motion.div style={{ scaleX }} className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px origin-left bg-gradient-to-r from-brand-300 to-brand-600 shadow-[0_0_10px_rgba(245,130,32,0.8)] md:block" />
+      <motion.div style={{ scaleX }} className="pointer-events-none absolute left-0 right-0 top-7 hidden h-px origin-left bg-gradient-to-r from-brand-300 to-brand-600 shadow-[0_0_10px_rgba(255,89,13,0.8)] md:block" />
       {children}
     </div>
   );
