@@ -80,3 +80,22 @@ html.lenis, html.lenis body { height: auto; }
 }
 @keyframes cue { 0% { transform: translateY(-100%); } 100% { transform: translateY(250%); } }
 .scanlines { background: repeating-linear-gradient(to bottom, rgba(255,255,255,0.6) 0px, rgba(255,255,255,0.6) 1px, transparent 1px, transparent 3px); }
+
+/* ---- Portfolio journey: scroll prompts and chapter motifs ---- */
+.ez-mouse::before {
+  content: ""; position: absolute; left: 50%; top: 5px; width: 3px; height: 6px; margin-left: -1.5px;
+  border-radius: 2px; background: #FF590D; box-shadow: 0 0 6px rgba(255,89,13,0.9);
+  animation: ez-wheel 1.6s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes ez-wheel { 0% { transform: translateY(0); opacity: 1; } 70% { transform: translateY(9px); opacity: 0; } 100% { transform: translateY(0); opacity: 0; } }
+@media (pointer: coarse) { .ez-mouse { display: none; } }
+.ez-chevron { opacity: 0.15; animation: ez-chev 1.6s ease-in-out infinite; }
+@keyframes ez-chev { 0%, 100% { opacity: 0.15; transform: translateY(-2px); } 40% { opacity: 1; transform: translateY(2px); } }
+.ez-ping { animation: ez-ping 2.4s cubic-bezier(0,0,.2,1) infinite; }
+@keyframes ez-ping { 0% { transform: scale(1); opacity: 0.7; } 80%, 100% { transform: scale(1.18, 1.45); opacity: 0; } }
+.ez-bob { animation: ez-bob 1.4s ease-in-out infinite; }
+@keyframes ez-bob { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(3px); } }
+.ez-caret { animation: ez-caret 1s steps(1) infinite; }
+@keyframes ez-caret { 50% { opacity: 0; } }
+.ez-ticker { animation: ez-marquee 14s linear infinite; }
+@keyframes ez-marquee { to { transform: translateX(-50%); } }

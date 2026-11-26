@@ -14,7 +14,7 @@ export const site = {
   // Offices: Karachi (eSeller Zone) and the US office of our partner company, Zenvyra Digital.
   offices: [
     { label: "Pakistan office", city: "Karachi", address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 74500, Pakistan", phone: "" },
-    { label: "US office (Zenvyra Digital)", city: "Missouri City, TX", address: "5680 Highway 6, #253, Missouri City, TX 77459, United States", phone: "+1 707-786-3133" },
+    { label: "US office", city: "Missouri City, TX", address: "5680 Highway 6, #253, Missouri City, TX 77459, United States", phone: "+1 707-786-3133" },
   ],
   partner: {
     name: "Zenvyra Digital",
