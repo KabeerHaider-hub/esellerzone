@@ -77,11 +77,23 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(5,6,10,0.85))]" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ink-950 via-ink-950/60 to-transparent" />
 
-        {/* HUD corners */}
-        <div className="pointer-events-none absolute left-4 top-24 hidden font-mono text-[11px] leading-5 text-white/35 sm:left-8 sm:block">
-          <p>SYS://ESZ-PORTFOLIO</p>
-          <p>NODE {String(active).padStart(2, "0")} / {String(stops).padStart(2, "0")}</p>
-          <p className="text-brand-500/80">● LIVE</p>
+        {/* HUD frame */}
+        <div className="pointer-events-none absolute inset-0 z-[5]">
+          <div className="scanlines absolute inset-0 opacity-[0.07]" />
+          {[["left-3 top-20 sm:left-6 sm:top-24", "border-l border-t"], ["right-3 top-20 sm:right-6 sm:top-24", "border-r border-t"], ["left-3 bottom-3 sm:left-6 sm:bottom-6", "border-l border-b"], ["right-3 bottom-3 sm:right-6 sm:bottom-6", "border-r border-b"]].map(([pos, b]) => (
+            <span key={pos} className={`absolute h-6 w-6 border-white/40 ${pos} ${b}`} />
+          ))}
+          <div className="absolute left-6 top-28 hidden font-mono text-[10px] leading-[1.7] tracking-[0.15em] text-white/40 sm:block lg:left-10 lg:top-32">
+            <p className="text-white/70">ESZ://PORTFOLIO.SYS</p>
+            <p>NODE&nbsp;&nbsp;&nbsp;{String(active).padStart(2, "0")}/{String(stops).padStart(2, "0")}</p>
+            <p>SECTOR&nbsp;{ch ? ch.code : "GATE"}</p>
+            <p>LINK&nbsp;&nbsp;&nbsp;<span className="text-brand-500">● ONLINE</span></p>
+            <div className="mt-3 h-px w-40 bg-white/15"><div className="h-px bg-brand-500 transition-all duration-700" style={{ width: `${(active / stops) * 100}%` }} /></div>
+          </div>
+          <div className="absolute bottom-8 left-6 hidden font-mono text-[10px] tracking-[0.15em] text-white/30 lg:block lg:left-10">
+            <p>LAT 24.8607 · LON 67.0011 // KHI</p>
+            <p>LAT 29.5636 · LON -95.5372 // MO-CITY TX</p>
+          </div>
         </div>
 
         {/* Chapter nav (right) */}
@@ -89,7 +101,7 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
           <ul className="space-y-3 text-right">
             {["Gate", ...chapters.map((c) => c.title)].map((label, i) => (
               <li key={label}>
-                <button onClick={() => goTo(i)} className={`group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.18em] transition ${i === active ? "text-white" : "text-white/40 hover:text-white/80"}`}>
+                <button onClick={() => goTo(i)} className={`group inline-flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.2em] transition ${i === active ? "text-white" : "text-white/40 hover:text-white/80"}`}>
                   <span className="hidden max-w-[16rem] truncate md:inline">{label}</span>
                   <span className={`h-2 w-2 rotate-45 border transition ${i === active ? "border-brand-500 bg-brand-500 shadow-[0_0_10px_rgba(255,89,13,0.9)]" : "border-white/40"}`} />
                 </button>
@@ -111,19 +123,28 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
             >
               {ch ? (
                 <>
-                  <p className="font-mono text-xs tracking-[0.35em] text-brand-400">
-                    {String(active).padStart(2, "0")} · {ch.code}
-                  </p>
-                  <h2 className="h-display mt-3 text-3xl sm:text-5xl">{ch.title}</h2>
-                  <p className="mx-auto mt-3 max-w-xl text-white/60">{ch.tagline}</p>
-                  <Link href={`/portfolio/${ch.slug}/`} className="btn-primary pointer-events-auto mt-6">
-                    See details <Icon name="arrow" className="h-4 w-4" />
+                  <div className="flex items-center justify-center gap-3 font-mono text-[11px] tracking-[0.35em] text-white/50">
+                    <span className="h-px w-10 bg-gradient-to-r from-transparent to-brand-500" />
+                    <span><span className="text-brand-500">{String(active).padStart(2, "0")}</span> / {ch.code}</span>
+                    <span className="h-px w-10 bg-gradient-to-l from-transparent to-brand-500" />
+                  </div>
+                  <h2 className="h-display mt-4 text-3xl font-medium tracking-tight sm:text-5xl lg:text-6xl">{ch.title}</h2>
+                  <p className="mx-auto mt-3 max-w-xl text-sm text-white/55 sm:text-base">{ch.tagline}</p>
+                  <div className="mx-auto mt-5 hidden max-w-2xl flex-wrap justify-center gap-2 sm:flex">
+                    {ch.services.slice(0, 4).map((x) => (
+                      <span key={x} className="border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/55 backdrop-blur">{x}</span>
+                    ))}
+                  </div>
+                  <Link href={`/portfolio/${ch.slug}/`} className="group pointer-events-auto relative mt-7 inline-flex items-center gap-3 border border-brand-500/70 bg-brand-500/10 px-7 py-3 font-mono text-xs uppercase tracking-[0.3em] text-white backdrop-blur transition hover:bg-brand-500 hover:text-ink-950">
+                    <span className="absolute -left-px -top-px h-2 w-2 border-l border-t border-white" />
+                    <span className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-white" />
+                    See details <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
                   </Link>
                 </>
               ) : (
                 <>
-                  <p className="font-mono text-xs tracking-[0.35em] text-brand-400">00 · PORTFOLIO</p>
-                  <h1 className="h-display mt-3 text-4xl sm:text-6xl">Our work, as a journey.</h1>
+                  <p className="font-mono text-[11px] tracking-[0.35em] text-white/50"><span className="text-brand-500">00</span> / GATEWAY</p>
+                  <h1 className="h-display mt-4 text-4xl font-medium tracking-tight sm:text-6xl">Our work, as a journey.</h1>
                   <p className="mx-auto mt-3 max-w-xl text-white/60">Scroll to travel through everything we build, sell and grow.</p>
                   <p className="mt-6 inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/40">
                     <span className="scroll-cue relative block h-10 w-px overflow-hidden bg-white/15" /> Scroll to explore
@@ -138,21 +159,44 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
         <AnimatePresence>
           {!entered && (
             <motion.div
-              className="absolute inset-0 z-20 grid place-items-center bg-ink-950/80 backdrop-blur-sm"
+              className="absolute inset-0 z-20 grid place-items-center bg-ink-950/85 backdrop-blur-md"
               exit={{ opacity: 0, scale: 1.08, filter: "blur(10px)" }}
               transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
             >
               <div className="px-6 text-center">
                 <LogoStacked className="mx-auto h-28 w-auto drop-shadow-[0_0_30px_rgba(255,89,13,0.45)]" />
-                <p className="mt-8 font-mono text-xs tracking-[0.4em] text-white/50">PORTFOLIO // INITIALISING</p>
-                <h1 className="h-display mt-4 text-3xl sm:text-5xl">Step into our work.</h1>
+                <BootLog />
+                <h1 className="h-display mt-6 text-3xl font-medium tracking-tight sm:text-5xl">Step into our work.</h1>
                 <p className="mx-auto mt-3 max-w-md text-white/55">Websites, marketplaces, social media and more, one station at a time.</p>
-                <button onClick={enter} className="btn-primary mt-8">Tap to enter <Icon name="arrow" className="h-4 w-4" /></button>
+                <button onClick={enter} className="group relative mt-8 inline-flex items-center gap-3 border border-brand-500/70 bg-brand-500/10 px-8 py-3.5 font-mono text-xs uppercase tracking-[0.35em] text-white transition hover:bg-brand-500 hover:text-ink-950">
+                  <span className="absolute -left-px -top-px h-2 w-2 border-l border-t border-white" />
+                  <span className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-white" />
+                  Enter <Icon name="arrow" className="h-4 w-4" />
+                </button>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </div>
+    </div>
+  );
+}
+
+const LOG = ["> boot esz-portfolio v2.6", "> mount sectors: WEB MKT COM SOC ADS BRD", "> render engine: webgl · bloom · reflections", "> status: ready"];
+
+function BootLog() {
+  const [n, setN] = useState(0);
+  useEffect(() => {
+    if (n >= LOG.length) return;
+    const t = setTimeout(() => setN((x) => x + 1), 380);
+    return () => clearTimeout(t);
+  }, [n]);
+  return (
+    <div className="mx-auto mt-8 w-full max-w-sm text-left font-mono text-[11px] leading-6 text-white/45">
+      {LOG.slice(0, n).map((l, i) => (
+        <p key={l} className={i === LOG.length - 1 ? "text-brand-500" : ""}>{l}</p>
+      ))}
+      {n < LOG.length && <p className="animate-pulse">_</p>}
     </div>
   );
 }
