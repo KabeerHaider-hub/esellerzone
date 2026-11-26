@@ -47,7 +47,6 @@ export function Footer() {
                 <span><span className="block text-white/80">{o.label}</span>{o.address}{o.phone && <a href={`tel:${o.phone.replace(/[^+\d]/g, "")}`} className="mt-1 block hover:text-white">{o.phone}</a>}</span>
               </li>
             ))}
-            <li className="flex gap-3"><Icon name="clock" className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" />{site.hours}</li>
           </ul>
         </div>
       </div>
