@@ -4,15 +4,20 @@ import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
 import Lenis from "lenis";
 import { LogoStacked } from "./Logo";
 
+let lenisInstance: Lenis | null = null;
+/** The page's Lenis instance, or null when smooth scrolling is off (e.g. reduced motion). */
+export const getLenis = () => lenisInstance;
+
 /** Buttery smooth scrolling (native scroll position, so scroll animations keep working). */
 export function SmoothScroll() {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const lenis = new Lenis({ duration: 1.15, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+    lenisInstance = lenis;
     let raf = 0;
     const loop = (time: number) => { lenis.raf(time); raf = requestAnimationFrame(loop); };
     raf = requestAnimationFrame(loop);
-    return () => { cancelAnimationFrame(raf); lenis.destroy(); };
+    return () => { cancelAnimationFrame(raf); lenis.destroy(); if (lenisInstance === lenis) lenisInstance = null; };
   }, []);
   return null;
 }

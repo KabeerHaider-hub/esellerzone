@@ -5,6 +5,18 @@ import { AnimatePresence, motion } from "framer-motion";
 import type { Chapter } from "@/lib/portfolio";
 import { Icon } from "./Icon";
 import { LogoStacked } from "./Logo";
+import { getLenis } from "./Experience";
+import { ChapterCaption, NextHint, ScrollPrompt } from "./PortfolioCaptions";
+
+const SNAP_EASE = (t: number) => 1 - Math.pow(1 - t, 4);
+
+/** Smoothly scroll the window to y, through Lenis when it is running. */
+function smoothScrollTo(y: number, reduce: boolean) {
+  const lenis = getLenis();
+  if (lenis) lenis.scrollTo(y, { duration: 1.1, easing: SNAP_EASE });
+  else window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
+}
+const prefersReduced = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
  * Single-page scrolling portfolio: an "enter" gate, then a 3D flight past one station per
@@ -54,6 +66,47 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // Station snapping: when scrolling pauses between two stations, glide to the next one in the
+  // direction of travel so the camera never stops mid-flight. Off for reduced motion.
+  useEffect(() => {
+    if (prefersReduced()) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let lastY = window.scrollY, dir = 1, held = false;
+    const snap = () => {
+      const el = section.current;
+      if (!el || held) return;
+      const max = el.offsetHeight - window.innerHeight;
+      const y = window.scrollY - el.offsetTop;
+      if (y <= 2 || y >= max - 2) return; // outside the journey or already on an end station
+      const seg = max / stops;
+      const f = y / seg;
+      // Leave the current station only after a deliberate nudge (15% of a leg).
+      const idx = dir > 0 ? Math.ceil(f - 0.15) : Math.floor(f + 0.15);
+      const dest = el.offsetTop + Math.min(stops, Math.max(0, idx)) * seg;
+      if (Math.abs(dest - window.scrollY) > 2) smoothScrollTo(dest, false);
+    };
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (Math.abs(y - lastY) > 0.5) dir = y > lastY ? 1 : -1;
+      lastY = y;
+      clearTimeout(timer);
+      timer = setTimeout(snap, 180);
+    };
+    const down = () => { held = true; };
+    const up = () => { held = false; clearTimeout(timer); timer = setTimeout(snap, 180); };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("touchstart", down, { passive: true });
+    window.addEventListener("touchend", up, { passive: true });
+    window.addEventListener("touchcancel", up, { passive: true });
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("touchstart", down);
+      window.removeEventListener("touchend", up);
+      window.removeEventListener("touchcancel", up);
+    };
+  }, [stops]);
+
   const enter = () => {
     setEntered(true);
     try { sessionStorage.setItem("ez-portfolio-entered", "1"); } catch {}
@@ -63,7 +116,8 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
     const el = section.current;
     if (!el) return;
     const max = el.offsetHeight - window.innerHeight;
-    window.scrollTo({ top: el.offsetTop + (i / stops) * max, behavior: "smooth" });
+    const leavingEnd = i > stops;
+    smoothScrollTo(leavingEnd ? el.offsetTop + el.offsetHeight : el.offsetTop + (i / stops) * max, prefersReduced());
     enter();
   };
 
@@ -111,49 +165,45 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
         </nav>
 
         {/* Caption */}
-        <div className="absolute inset-x-0 bottom-10 z-10 px-4 text-center sm:bottom-14">
+        <div className="absolute inset-x-0 bottom-14 z-10 px-4 text-center sm:bottom-20">
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -16, filter: "blur(8px)" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
               className="mx-auto max-w-3xl"
             >
               {ch ? (
-                <>
-                  <div className="flex items-center justify-center gap-3 font-mono text-[11px] tracking-[0.35em] text-white/50">
-                    <span className="h-px w-10 bg-gradient-to-r from-transparent to-brand-500" />
-                    <span><span className="text-brand-500">{String(active).padStart(2, "0")}</span> / {ch.code}</span>
-                    <span className="h-px w-10 bg-gradient-to-l from-transparent to-brand-500" />
-                  </div>
-                  <h2 className="h-display mt-4 text-3xl font-medium tracking-tight sm:text-5xl lg:text-6xl">{ch.title}</h2>
-                  <p className="mx-auto mt-3 max-w-xl text-sm text-white/55 sm:text-base">{ch.tagline}</p>
-                  <div className="mx-auto mt-5 hidden max-w-2xl flex-wrap justify-center gap-2 sm:flex">
-                    {ch.services.slice(0, 4).map((x) => (
-                      <span key={x} className="border border-white/10 bg-white/[0.03] px-3 py-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/55 backdrop-blur">{x}</span>
-                    ))}
-                  </div>
-                  <Link href={`/portfolio/${ch.slug}/`} className="group pointer-events-auto relative mt-7 inline-flex items-center gap-3 border border-brand-500/70 bg-brand-500/10 px-7 py-3 font-mono text-xs uppercase tracking-[0.3em] text-white backdrop-blur transition hover:bg-brand-500 hover:text-ink-950">
-                    <span className="absolute -left-px -top-px h-2 w-2 border-l border-t border-white" />
-                    <span className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-white" />
-                    See details <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
-                  </Link>
-                </>
+                <ChapterCaption ch={ch} index={active} />
               ) : (
                 <>
                   <p className="font-mono text-[11px] tracking-[0.35em] text-white/50"><span className="text-brand-500">00</span> / GATEWAY</p>
                   <h1 className="h-display mt-4 text-4xl font-medium tracking-tight sm:text-6xl">Our work, as a journey.</h1>
-                  <p className="mx-auto mt-3 max-w-xl text-white/60">Scroll to travel through everything we build, sell and grow.</p>
-                  <p className="mt-6 inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.3em] text-white/40">
-                    <span className="scroll-cue relative block h-10 w-px overflow-hidden bg-white/15" /> Scroll to explore
-                  </p>
+                  <p className="mx-auto mt-3 max-w-xl text-white/60">Six services, one station each. Travel through everything we build, sell and grow.</p>
+                  <ScrollPrompt className="mt-8" onClick={() => goTo(1)} />
                 </>
               )}
             </motion.div>
           </AnimatePresence>
         </div>
+
+        {/* What comes next */}
+        <AnimatePresence>
+          {active > 0 && (
+            <motion.div
+              key="next"
+              className="absolute inset-x-0 bottom-4 z-10 flex justify-center sm:bottom-7"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, delay: 0.6 }}
+            >
+              <NextHint next={chapters[active] ?? null} onClick={() => goTo(active + 1)} />
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Enter gate */}
         <AnimatePresence>
@@ -173,6 +223,10 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
                   <span className="absolute -bottom-px -right-px h-2 w-2 border-b border-r border-white" />
                   Enter <Icon name="arrow" className="h-4 w-4" />
                 </button>
+                <p className="mt-6 flex items-center justify-center gap-2 font-mono text-[11px] uppercase tracking-[0.3em] text-white/60">
+                  <svg viewBox="0 0 24 24" className="ez-bob h-4 w-4 text-brand-500" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7" /></svg>
+                  or scroll down to explore
+                </p>
               </div>
             </motion.div>
           )}
