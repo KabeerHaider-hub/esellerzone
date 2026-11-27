@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/blog/ecommerce-agency-pakistan/", "destination": "/blog/outsource-ecommerce-management/", "permanent": true },
+    { "source": "/blog/ecommerce-agency-pakistan", "destination": "/blog/outsource-ecommerce-management/", "permanent": true }
+  ]
+}

@@ -21,7 +21,7 @@ export function Footer() {
           </div>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-white">Company</h3>
+          <p className="text-sm font-semibold text-white">Company</p>
           <ul className="mt-4 space-y-2.5 text-sm">
             {nav.slice(1).map((n) => (
               <li key={n.href}><Link href={n.href} className="text-white/60 hover:text-brand-300">{n.label}</Link></li>
@@ -30,7 +30,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-white">Services</h3>
+          <p className="text-sm font-semibold text-white">Services</p>
           <ul className="mt-4 space-y-2.5 text-sm">
             {services.map((s) => (
               <li key={s.slug}><Link href={`/services/${s.slug}/`} className="text-white/60 hover:text-brand-300">{s.title}</Link></li>
@@ -38,7 +38,7 @@ export function Footer() {
           </ul>
         </div>
         <div>
-          <h3 className="text-sm font-semibold text-white">Get in touch</h3>
+          <p className="text-sm font-semibold text-white">Get in touch</p>
           <ul className="mt-4 space-y-3 text-sm text-white/60">
             <li className="flex gap-3"><Icon name="mail" className="mt-0.5 h-4 w-4 shrink-0 text-brand-500" /><a href={`mailto:${site.email}`} className="hover:text-white">{site.email}</a></li>
             {site.offices.map((o) => (

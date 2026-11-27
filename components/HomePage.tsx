@@ -56,7 +56,7 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
           <HeroCopy>
             {/* The keyword line is the page's <h1>; the big slogan below is styled text. */}
             <FadeIn delay={0.2}><h1 className="eyebrow">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-500" /> E-commerce, web development &amp; social media agency
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-500" /> E-commerce &amp; digital marketing agency for US, UK &amp; global brands
             </h1></FadeIn>
             <p className="h-display mt-8 text-[2.9rem] leading-[0.98] sm:text-7xl lg:text-[6.2rem]">
               <SplitReveal text="We grow your business," delay={0.15} />
@@ -117,13 +117,25 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
             accent={["sell", "everywhere", "growth", "engine"]}
           />
         </div>
+        <Reveal>
+          <p className="mt-10 max-w-3xl text-base leading-relaxed text-white/60 sm:text-lg">
+            Brands in the US, UK and worldwide use us for{" "}
+            <Link href="/services/marketplace-management/" className="text-white underline decoration-brand-500/60 underline-offset-4 hover:decoration-brand-500">Amazon and Walmart account management</Link>,{" "}
+            <Link href="/services/ecommerce-development/" className="text-white underline decoration-brand-500/60 underline-offset-4 hover:decoration-brand-500">Shopify store development</Link>,{" "}
+            <Link href="/services/ppc-paid-advertising/" className="text-white underline decoration-brand-500/60 underline-offset-4 hover:decoration-brand-500">PPC management</Link>,{" "}
+            <Link href="/services/seo-services/" className="text-white underline decoration-brand-500/60 underline-offset-4 hover:decoration-brand-500">SEO</Link> and{" "}
+            <Link href="/services/social-media-marketing/" className="text-white underline decoration-brand-500/60 underline-offset-4 hover:decoration-brand-500">social media marketing</Link>.{" "}
+            <Link href="/about/" className="text-brand-300 hover:text-brand-200">Meet the team</Link> or{" "}
+            <Link href="/portfolio/" className="text-brand-300 hover:text-brand-200">see our work</Link>.
+          </p>
+        </Reveal>
       </section>
 
       {/* PILLARS */}
       <section className="container-x mt-32">
         <SectionHeading
           eyebrow="How we think"
-          title={<>One partner. <span className="text-gradient">A complete growth engine.</span></>}
+          title={<>One partner. <span className="text-gradient">A complete e-commerce growth engine.</span></>}
           text="Most brands juggle a marketplace freelancer, a web developer, an ads agency and a designer. We replace the patchwork with one team running one plan, so every part pushes the same direction."
         />
         <div className="mt-14 grid gap-5 md:grid-cols-3">
@@ -148,17 +160,17 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
       <div className="mt-24"><HorizontalServices services={services} /></div>
       <section className="container-x mt-32 lg:hidden">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading eyebrow="What we do" title={<>Services built for <span className="text-gradient">modern sellers.</span></>} />
+          <SectionHeading eyebrow="What we do" title={<>E-commerce, web &amp; marketing services <span className="text-gradient">built for modern sellers.</span></>} />
           <Reveal><Link href="/services/" className="btn-ghost shrink-0">All services <Icon name="arrow" className="h-4 w-4" /></Link></Reveal>
         </div>
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.slice(0, 6).map((s, i) => <ServiceCard key={s.slug} s={s} i={i} />)}
+          {services.slice(0, 6).map((s, i) => <ServiceCard key={s.slug} s={s} i={i} as="p" />)}
         </div>
       </section>
 
       {/* PROCESS */}
       <section className="container-x mt-32">
-        <SectionHeading eyebrow="Our process" title={<>From first call to <span className="text-gradient">compounding growth.</span></>} text="A clear, repeatable process so you always know what's happening, what's next and what it's delivering." />
+        <SectionHeading eyebrow="Our process" title={<>Our growth process: from first call <span className="text-gradient">to compounding sales.</span></>} text="A clear, repeatable process so you always know what's happening, what's next and what it's delivering." />
         <ProcessSteps steps={["Discovery & audit", "Strategy & roadmap", "Design, build & integrate", "Launch & manage", "Optimise & scale"]} />
       </section>
 
@@ -166,7 +178,7 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
       <section className="relative mt-32 overflow-hidden py-24">
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-brand-500/[0.06] to-transparent" />
         <div className="container-x relative grid gap-14 lg:grid-cols-2">
-          <SectionHeading eyebrow="Why eSeller Zone" title={<>Our success is <span className="text-gradient">tied to yours.</span></>} text="We're a growth partner, not a vendor. That means honest advice, transparent reporting and plans that scale with your revenue." />
+          <SectionHeading eyebrow="Why eSeller Zone" title={<>An e-commerce agency whose success <span className="text-gradient">is tied to yours.</span></>} text="We're a growth partner, not a vendor. That means honest advice, transparent reporting and plans that scale with your revenue." />
           <div className="grid gap-4 sm:grid-cols-2">
             {why.map((w, i) => (
               <Reveal key={w.t} delay={i * 0.08}>
@@ -184,7 +196,7 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
       {/* WORK */}
       <section className="container-x mt-16">
         <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading eyebrow="Portfolio" title={<>Explore our work, <span className="text-gradient">chapter by chapter.</span></>} />
+          <SectionHeading eyebrow="Portfolio" title={<>Our e-commerce &amp; web projects, <span className="text-gradient">chapter by chapter.</span></>} />
           <Reveal><Link href="/portfolio/" className="btn-ghost shrink-0">Enter the portfolio <Icon name="arrow" className="h-4 w-4" /></Link></Reveal>
         </div>
         <div className="mt-14 grid gap-5 md:grid-cols-3">
@@ -209,7 +221,7 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
       {/* FAQ + BLOG */}
       <section className="container-x mt-32 grid gap-14 lg:grid-cols-[1fr_1.2fr]">
         <div>
-          <SectionHeading eyebrow="FAQ" title={<>Questions, <span className="text-gradient">answered.</span></>} />
+          <SectionHeading eyebrow="FAQ" title={<>E-commerce agency questions, <span className="text-gradient">answered.</span></>} />
           <Reveal className="mt-8">
             <p className="text-white/55">Latest from the blog</p>
             <ul className="mt-4 space-y-3">

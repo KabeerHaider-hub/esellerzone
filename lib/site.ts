@@ -14,7 +14,7 @@ export const site = {
   offices: [
     {
       id: "karachi",
-      label: "Pakistan office",
+      label: "Head office",
       city: "Karachi",
       address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 75400, Pakistan",
       phone: "+92 333 3128078",

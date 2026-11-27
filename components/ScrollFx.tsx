@@ -86,7 +86,7 @@ export function HorizontalServices({ services }: { services: Service[] }) {
           <div className="container-x flex items-end justify-between">
             <div>
               <span className="eyebrow">What we do</span>
-              <h2 className="h-display mt-5 text-5xl">Eleven services. <span className="text-white/40">One team.</span></h2>
+              <h2 className="h-display mt-5 text-5xl">Eleven e-commerce &amp; digital services. <span className="text-white/40">One team.</span></h2>
             </div>
             <Link href="/services/" className="btn-ghost">All services <Icon name="arrow" className="h-4 w-4" /></Link>
           </div>

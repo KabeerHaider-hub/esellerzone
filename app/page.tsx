@@ -6,7 +6,7 @@ export const metadata = pageMeta({
   title: "eSeller Zone | E-Commerce, Amazon & Web Development Agency",
   absoluteTitle: true,
   description:
-    "Karachi-based e-commerce and digital agency serving the US and UK: Amazon and Walmart management, Shopify stores, websites, apps, SEO, ads and social media.",
+    "E-commerce and digital growth agency for brands in the US, UK and worldwide: Amazon and Walmart management, Shopify stores, websites, apps, SEO, ads and social media.",
   path: "/",
 });
 

@@ -4,7 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollFx";
-import { SmoothScroll, Preloader, Cursor, Grain } from "@/components/Experience";
+import { SmoothScroll, Cursor, Grain } from "@/components/Experience";
 import { site } from "@/lib/site";
 import { JsonLd, ldSiteGraph, defaultOgImage, isPreviewBuild } from "@/lib/seo";
 import { Analytics } from "@/components/Analytics";
@@ -44,7 +44,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
         <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-lg focus:bg-brand-500 focus:px-4 focus:py-2 focus:text-ink-950">Skip to content</a>
-        <Preloader />
         <SmoothScroll />
         <Cursor />
         <Grain />

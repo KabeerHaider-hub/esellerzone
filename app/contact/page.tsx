@@ -8,9 +8,9 @@ import { PartnerCard } from "@/components/PartnerCard";
 import { pageMeta, JsonLd, ldBreadcrumbs } from "@/lib/seo";
 
 export const metadata: Metadata = pageMeta({
-  title: "Contact Us: Karachi & US Offices",
+  title: "Contact Us: Get a Free E-Commerce Growth Quote",
   description:
-    "Contact eSeller Zone in Karachi, Pakistan or our US office with Zenvyra Digital in Missouri City, TX. Get a free quote for e-commerce, web or marketing work.",
+    "Talk to eSeller Zone about Amazon, Shopify, web development or digital marketing. We work with brands in the US, UK and worldwide. Get a free quote in one business day.",
   path: "/contact/",
 });
 
