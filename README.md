@@ -37,3 +37,20 @@ https://kabeerhaider-hub.github.io/esellerzone/
 1. In Vercel: **Add New → Project → Import** `KabeerHaider-hub/esellerzone`. Keep the defaults (Framework: Next.js) and click **Deploy**.
 2. The home page is Option 2 (3D planet behind the whole page). Option 1 is kept at `/v1/`.
 3. To make Option 1 the home page instead, add the environment variable `NEXT_PUBLIC_HOME_VARIANT` = `classic`.
+
+## SEO
+Titles, descriptions, canonical URLs, social share cards and Google structured data are set in `lib/seo.tsx`.
+- Per-service search titles and descriptions: `seoTitle` / `seoDescription` in `lib/services.ts`.
+- Company, offices, opening hours, countries served and social profiles (Google's `sameAs`): `lib/site.ts`.
+  Keep the name, address and phone here identical to Google Business Profile and every directory listing.
+- New blog posts: add to `lib/content.ts`, set `services` to link the article to related service pages.
+- Share image: `public/og/default.png` (1200×630).
+- GitHub Pages and Vercel preview builds are automatically `noindex`; only the production build is indexed.
+
+Optional environment variables (set them in Vercel → Settings → Environment Variables, then redeploy):
+| Variable | What it does |
+|---|---|
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Google Search Console HTML-tag verification code |
+| `NEXT_PUBLIC_BING_SITE_VERIFICATION` | Bing Webmaster Tools verification code |
+| `NEXT_PUBLIC_GA_ID` | Google Analytics 4 measurement ID (e.g. `G-XXXXXXX`) |
+| `NEXT_PUBLIC_NOINDEX` | Set to `1` to keep a build out of search engines |

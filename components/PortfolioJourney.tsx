@@ -216,7 +216,7 @@ export function PortfolioJourney({ chapters }: { chapters: Chapter[] }) {
               <div className="px-6 text-center">
                 <LogoStacked className="mx-auto h-28 w-auto drop-shadow-[0_0_30px_rgba(255,89,13,0.45)]" />
                 <BootLog />
-                <h1 className="h-display mt-6 text-3xl font-medium tracking-tight sm:text-5xl">Step into our work.</h1>
+                <p className="h-display mt-6 text-3xl font-medium tracking-tight sm:text-5xl">Step into our work.</p>
                 <p className="mx-auto mt-3 max-w-md text-white/55">Websites, marketplaces, social media and more, one station at a time.</p>
                 <button onClick={enter} className="group relative mt-8 inline-flex items-center gap-3 border border-brand-500/70 bg-brand-500/10 px-8 py-3.5 font-mono text-xs uppercase tracking-[0.35em] text-white transition hover:bg-brand-500 hover:text-ink-950">
                   <span className="absolute -left-px -top-px h-2 w-2 border-l border-t border-white" />

@@ -5,8 +5,14 @@ import { Reveal } from "@/components/Reveal";
 import { Icon, type AnyIcon } from "@/components/Icon";
 import { site } from "@/lib/site";
 import { PartnerCard } from "@/components/PartnerCard";
+import { pageMeta, JsonLd, ldBreadcrumbs } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Contact", description: "Talk to eSeller Zone about marketplaces, e-commerce, websites, apps, AI, SEO and marketing." };
+export const metadata: Metadata = pageMeta({
+  title: "Contact Us: Karachi & US Offices",
+  description:
+    "Contact eSeller Zone in Karachi, Pakistan or our US office with Zenvyra Digital in Missouri City, TX. Get a free quote for e-commerce, web or marketing work.",
+  path: "/contact/",
+});
 
 export default function Contact() {
   const items: { icon: AnyIcon; label: string; value: string; href?: string }[] = [
@@ -38,6 +44,7 @@ export default function Contact() {
       <section className="container-x mt-10">
         <PartnerCard />
       </section>
+      <JsonLd data={[ldBreadcrumbs([["Contact", "/contact/"]]), { "@context": "https://schema.org", "@type": "ContactPage", url: `${site.domain}/contact/`, about: { "@id": `${site.domain}/#organization` } }]} />
     </>
   );
 }

@@ -6,30 +6,39 @@ import { Footer } from "@/components/Footer";
 import { ScrollProgress } from "@/components/ScrollFx";
 import { SmoothScroll, Preloader, Cursor, Grain } from "@/components/Experience";
 import { site } from "@/lib/site";
+import { JsonLd, ldSiteGraph, defaultOgImage, isPreviewBuild } from "@/lib/seo";
+import { Analytics } from "@/components/Analytics";
 
 const display = Sora({ subsets: ["latin"], variable: "--font-display", weight: ["400", "500", "600", "700"] });
 const body = Inter({ subsets: ["latin"], variable: "--font-body" });
 
+const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
-  title: { default: `${site.name} | E-Commerce & Digital Growth Agency`, template: `%s | ${site.name}` },
+  title: { default: `${site.name} | E-Commerce, Amazon & Web Development Agency`, template: `%s | ${site.name}` },
   description: site.description,
-  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/brand/favicon.png` },
-  openGraph: { type: "website", siteName: site.name, title: site.name, description: site.description },
+  applicationName: site.name,
+  authors: [{ name: site.name, url: site.domain }],
+  publisher: site.name,
+  formatDetection: { telephone: false, email: false, address: false },
+  icons: { icon: `${base}/brand/favicon.png`, apple: `${base}/brand/logo-icon.png` },
+  openGraph: { type: "website", siteName: site.name, locale: "en_US", title: site.name, description: site.description, images: [defaultOgImage] },
+  twitter: { card: "summary_large_image" },
+  // Preview builds (GitHub Pages, Vercel previews) stay out of Google so they never compete with esellerzone.com.
+  robots: isPreviewBuild
+    ? { index: false, follow: false }
+    : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
+  // Paste verification codes into these env vars once Search Console / Bing Webmaster Tools give them to you.
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } : {}),
+    ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } } : {}),
+  },
 };
 
 export const viewport: Viewport = { themeColor: "#05060A" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const orgLd = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    name: site.name,
-    url: site.domain,
-    email: site.email,
-    logo: `${site.domain}/brand/logo-stacked.png`,
-    sameAs: site.socials.map((s) => s.href),
-  };
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body>
@@ -42,7 +51,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgLd) }} />
+        <JsonLd data={ldSiteGraph()} />
+        <Analytics />
       </body>
     </html>
   );

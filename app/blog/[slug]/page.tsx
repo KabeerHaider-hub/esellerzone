@@ -5,6 +5,8 @@ import { CtaBand } from "@/components/Sections";
 import { Icon } from "@/components/Icon";
 import { posts, getPost } from "@/lib/content";
 import { site } from "@/lib/site";
+import { getService } from "@/lib/services";
+import { pageMeta, JsonLd, ldPost, ldBreadcrumbs } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,21 +17,13 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const p = getPost((await params).slug);
   if (!p) return {};
-  return { title: p.title, description: p.excerpt, openGraph: { type: "article", title: p.title, description: p.excerpt, publishedTime: p.date } };
+  return pageMeta({ title: p.title, description: p.excerpt, path: `/blog/${p.slug}/`, type: "article", publishedTime: p.date, modifiedTime: p.updated });
 }
 
 export default async function PostPage({ params }: Props) {
   const p = getPost((await params).slug);
   if (!p) notFound();
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: p.title,
-    description: p.excerpt,
-    datePublished: p.date,
-    author: { "@type": "Organization", name: site.name },
-    publisher: { "@type": "Organization", name: site.name },
-  };
+  const related = (p.services ?? []).map(getService).filter((x) => x !== undefined);
   return (
     <>
       <article className="container-x max-w-3xl pt-40">
@@ -51,8 +45,23 @@ export default async function PostPage({ params }: Props) {
             </div>
           ))}
         </div>
+        {related.length > 0 && (
+          <aside className="glass mt-14 p-7">
+            <p className="text-xs uppercase tracking-[0.2em] text-brand-400">Need a hand with this?</p>
+            <ul className="mt-4 space-y-3">
+              {related.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/services/${s.slug}/`} className="group flex items-start gap-3 text-white/85 hover:text-white">
+                    <Icon name="arrow" className="mt-1 h-4 w-4 shrink-0 text-brand-500 transition group-hover:translate-x-1" />
+                    <span><span className="font-medium">{s.title}</span><span className="block text-sm text-white/50">{s.short}</span></span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        )}
       </article>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+      <JsonLd data={[ldPost(p), ldBreadcrumbs([["Blog", "/blog/"], [p.title, `/blog/${p.slug}/`]])]} />
       <CtaBand />
     </>
   );

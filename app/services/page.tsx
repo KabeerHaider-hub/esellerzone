@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
 import { PageHero, ServiceCard, CtaBand, SectionHeading, ProcessSteps } from "@/components/Sections";
 import { services } from "@/lib/services";
+import { pageMeta, JsonLd, ldBreadcrumbs, ldServiceList } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Services",
-  description: "Marketplace management, e-commerce stores, websites, apps, software, AI automation, SEO, PPC, social media, branding and eBook publishing.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Services: E-Commerce, Web Development & Marketing",
+  description:
+    "Amazon and Walmart management, Shopify stores, website and app development, AI automation, SEO, PPC, social media and branding from one accountable team.",
+  path: "/services/",
+});
 
 const groups = ["Commerce", "Build", "Growth", "Create"] as const;
 const groupText: Record<(typeof groups)[number], string> = {
@@ -39,6 +42,7 @@ export default function ServicesPage() {
         <ProcessSteps steps={["Discovery & strategy", "Planning & design", "Build & integrate", "Launch & support", "Optimise & scale"]} />
       </section>
       <CtaBand />
+      <JsonLd data={[ldBreadcrumbs([["Services", "/services/"]]), ldServiceList()]} />
     </>
   );
 }

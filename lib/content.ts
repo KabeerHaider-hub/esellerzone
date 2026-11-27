@@ -65,6 +65,10 @@ export type Post = {
   title: string;
   excerpt: string;
   date: string;
+  /** Last meaningful update (YYYY-MM-DD). Shown to Google as dateModified. */
+  updated?: string;
+  /** Related service slugs, linked at the end of the article. */
+  services?: string[];
   readMins: number;
   category: string;
   body: { h?: string; p?: string; list?: string[] }[];
@@ -73,7 +77,61 @@ export type Post = {
 // Starter articles for SEO. Add new posts to this array; pages and the sitemap update automatically.
 export const posts: Post[] = [
   {
+    slug: "amazon-account-management-services",
+    services: ["marketplace-management", "ppc-paid-advertising"],
+    title: "Amazon Account Management Services: What's Included and What It Costs",
+    excerpt: "What a good Amazon account management agency actually does each week, how pricing works, and the questions to ask before you hire one.",
+    date: "2026-11-27",
+    readMins: 6,
+    category: "Marketplaces",
+    body: [
+      { p: "Amazon rewards sellers who show up every day: fresh listings, healthy inventory, tuned ads and fast answers to customers. Account management services exist because most founders can't do all of that and still run the business. Here is what you should expect, and what it typically costs." },
+      { h: "What's included in Amazon account management", list: ["Listing creation and optimisation: titles, bullets, A+ content, backend search terms and image direction", "Sponsored Products, Brands and Display campaigns managed against ACoS and TACoS targets", "Inventory planning so you never stock out before a peak or pay long-term storage fees", "Account health: policy warnings, suppressed listings, cases and reinstatement support", "Customer messages, returns and review monitoring", "Weekly or monthly reporting on sales, profit and ad spend"] },
+      { h: "Walmart, eBay and TikTok Shop too", p: "Most brands that grow on Amazon expand to Walmart Marketplace, eBay or TikTok Shop next. Managing them with the same team keeps pricing, inventory and branding consistent, and one report shows every channel side by side." },
+      { h: "How pricing usually works", p: "Agencies charge a fixed monthly fee, a percentage of sales, or a mix. Fixed fees are easier to budget. At eSeller Zone, management starts at $499 a month for one marketplace, $999 for up to two with PPC management, and $1,499 for up to four with a dedicated account manager." },
+      { h: "Questions to ask before you hire", list: ["Who exactly will work on my account, and how many accounts do they handle?", "Which metrics will you report, and how often?", "Do I keep full ownership of my Seller Central account and brand registry?", "What happens to my listings and data if we stop working together?", "Can you show results for brands in my category?"] },
+      { h: "Red flags", list: ["Guaranteed rankings or sales figures", "Asking for your account login instead of user permissions", "Review schemes or anything against Amazon's terms of service", "Long lock-in contracts before any results"] },
+      { p: "Want a second opinion on your account? Book a free strategy call and we'll audit your listings, ads and account health." },
+    ],
+  },
+  {
+    slug: "shopify-store-development-cost",
+    services: ["ecommerce-development", "website-development"],
+    title: "How Much Does It Cost to Build a Shopify Store in 2026?",
+    excerpt: "A clear breakdown of Shopify store development costs: platform fees, themes, apps, custom design and ongoing support.",
+    date: "2026-11-26",
+    readMins: 5,
+    category: "E-Commerce",
+    body: [
+      { p: "The honest answer is anywhere from a few hundred dollars to tens of thousands. What moves the price is how much is custom, how many products you have, and what has to connect to the store. Here is how the budget breaks down." },
+      { h: "1. Platform and app fees (monthly)", p: "Shopify charges a monthly plan fee plus payment processing, and most stores add a handful of paid apps for reviews, upsells, email and subscriptions. Check Shopify's current pricing page, and budget for apps separately: they add up quickly." },
+      { h: "2. Theme or custom design (one-off)", list: ["Premium theme, customised to your brand: the fastest and cheapest route", "Custom design on top of a theme: unique look, faster launch than a full build", "Fully custom or headless storefront (for example Next.js on Shopify): best performance and flexibility, highest cost"] },
+      { h: "3. Setup and build work", list: ["Product upload, collections and filters", "Payment gateways, shipping rates and taxes", "Integrations with inventory, ERP, POS or marketplaces", "Speed optimisation, basic SEO and analytics", "Testing on phones, tablets and desktops"] },
+      { h: "Typical packages", p: "As a guide, eSeller Zone builds start at $999 for a customised store with up to 100 products, $1,699 for a custom design with unlimited products and integrations, and $2,999 for a growth-ready store with automation flows and 90 days of support." },
+      { h: "Costs people forget", list: ["Product photography and copywriting", "Ongoing updates, backups and app maintenance", "Marketing to bring the first visitors in: SEO, ads and social media"] },
+      { p: "Send us your product count and must-have features and we'll give you a fixed quote, usually within one business day." },
+    ],
+  },
+  {
+    slug: "social-media-marketing-for-ecommerce",
+    services: ["social-media-marketing", "branding-creative"],
+    title: "Social Media Marketing for E-Commerce Brands: A 90-Day Plan",
+    excerpt: "A practical 90-day social media plan for online stores: which platforms to pick, what to post, and how to turn followers into sales.",
+    date: "2026-11-25",
+    readMins: 6,
+    category: "Social Media",
+    body: [
+      { p: "Posting every day without a plan burns time and rarely sells. Online brands that grow on social media pick the right platforms, post content that answers buying questions, and connect every post to a measurable next step." },
+      { h: "Days 1 to 30: foundations", list: ["Choose two platforms where your buyers already are: Instagram and TikTok for consumer products, LinkedIn for B2B", "Make bios, links and highlights point to your best-selling products", "Set up tracking so you can see which posts drive store visits and sales", "Build a library of product photos, short videos and customer content"] },
+      { h: "Days 31 to 60: a content rhythm", list: ["Three content pillars: product in use, behind the scenes, and customer stories", "Short videos first; they reach new people on every major platform", "Reply to every comment and message within a day", "Test one small paid campaign to boost your best organic post"] },
+      { h: "Days 61 to 90: scale what works", list: ["Turn top posts into ads aimed at lookalike audiences", "Retarget store visitors who didn't buy", "Partner with two or three creators in your niche", "Review the numbers and cut what isn't driving sales"] },
+      { h: "What to measure", list: ["Reach and follower growth (awareness)", "Saves, shares and comments (interest)", "Clicks to the store and add-to-carts (intent)", "Sales and return on ad spend (results)"] },
+      { p: "Want this run for you? Our social media team plans, creates and manages content and campaigns for e-commerce brands." },
+    ],
+  },
+  {
     slug: "amazon-listing-optimization-guide",
+    services: ["marketplace-management", "ppc-paid-advertising"],
     title: "Amazon Listing Optimization: A Practical Guide for 2026",
     excerpt: "Titles, bullets, images and backend keywords: the listing fundamentals that still move rankings and conversion on Amazon.",
     date: "2026-11-10",
@@ -91,6 +149,7 @@ export const posts: Post[] = [
   },
   {
     slug: "shopify-vs-custom-store",
+    services: ["ecommerce-development", "website-development"],
     title: "Shopify vs a Custom E-Commerce Store: Which Is Right for You?",
     excerpt: "Speed to launch, cost, flexibility and scale. How to pick the platform that matches your stage of growth.",
     date: "2026-10-28",
@@ -106,6 +165,7 @@ export const posts: Post[] = [
   },
   {
     slug: "ai-automation-for-online-sellers",
+    services: ["ai-automation", "software-solutions"],
     title: "5 AI Automations Every Online Seller Should Set Up",
     excerpt: "From customer replies to inventory alerts, these automations save hours each week without adding headcount.",
     date: "2026-10-14",
@@ -122,6 +182,7 @@ export const posts: Post[] = [
   },
   {
     slug: "local-seo-checklist",
+    services: ["seo-services", "website-development"],
     title: "The Small Business SEO Checklist That Actually Moves Rankings",
     excerpt: "Skip the noise. These are the technical, on-page and local SEO tasks with the biggest impact for small businesses.",
     date: "2026-09-30",

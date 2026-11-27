@@ -6,6 +6,11 @@ import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 import { Spotlight } from "@/components/Spotlight";
 import { services, getService } from "@/lib/services";
+import { posts } from "@/lib/content";
+import { pageMeta, JsonLd, ldBreadcrumbs, ldService } from "@/lib/seo";
+
+// Lower-case a title for use mid-sentence, keeping acronyms like SEO, PPC and AI.
+const lc = (t: string) => t.split(" ").map((w) => (/^[A-Z]{2,}/.test(w) ? w : w.toLowerCase())).join(" ");
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,18 +21,19 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const s = getService((await params).slug);
   if (!s) return {};
-  return { title: s.title, description: s.intro };
+  return pageMeta({ title: s.seoTitle ?? s.title, description: s.seoDescription ?? s.intro, path: `/services/${s.slug}/` });
 }
 
 export default async function ServicePage({ params }: Props) {
   const s = getService((await params).slug);
   if (!s) notFound();
   const others = services.filter((x) => x.slug !== s.slug);
+  const reading = posts.filter((p) => p.services?.includes(s.slug));
   const more = [...others.filter((x) => x.category === s.category), ...others.filter((x) => x.category !== s.category)].slice(0, 3);
 
   return (
     <>
-      <PageHero eyebrow={s.title} title={s.headline} text={s.intro}>
+      <PageHero eyebrow={s.title} eyebrowIsH1 title={s.headline} text={s.intro}>
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
           <Link href="/contact/" className="btn-primary">Get a free quote <Icon name="arrow" className="h-4 w-4" /></Link>
           {s.packages && <a href="#packages" className="btn-ghost">View packages</a>}
@@ -35,7 +41,7 @@ export default async function ServicePage({ params }: Props) {
       </PageHero>
 
       <section className="container-x">
-        <SectionHeading eyebrow="What's included" title={<>Complete {s.title.toLowerCase()}, <span className="text-gradient">done for you.</span></>} />
+        <SectionHeading eyebrow="What's included" title={<>Complete {lc(s.title)}, <span className="text-gradient">done for you.</span></>} />
         <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {s.features.map((f, i) => (
             <Reveal key={f.title} delay={(i % 4) * 0.06}>
@@ -52,7 +58,7 @@ export default async function ServicePage({ params }: Props) {
       </section>
 
       <section className="container-x mt-28">
-        <SectionHeading eyebrow="Process" title={<>How we deliver <span className="text-gradient">{s.title.toLowerCase()}.</span></>} />
+        <SectionHeading eyebrow="Process" title={<>How we deliver <span className="text-gradient">{lc(s.title)}.</span></>} />
         <ProcessSteps steps={s.process} />
       </section>
 
@@ -105,7 +111,24 @@ export default async function ServicePage({ params }: Props) {
         </div>
       </section>
 
-      <CtaBand title={`Let's talk about your ${s.title.toLowerCase()}.`} />
+      {reading.length > 0 && (
+        <section className="container-x mt-20">
+          <p className="text-sm uppercase tracking-[0.2em] text-white/40">Further reading</p>
+          <ul className="mt-4 space-y-3">
+            {reading.map((p) => (
+              <li key={p.slug}>
+                <Link href={`/blog/${p.slug}/`} className="group inline-flex items-start gap-3 text-white/80 hover:text-white">
+                  <Icon name="arrow" className="mt-1 h-4 w-4 shrink-0 text-brand-500 transition group-hover:translate-x-1" />
+                  {p.title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      <CtaBand title={`Let's talk about your ${lc(s.title)}.`} />
+      <JsonLd data={[ldService(s), ldBreadcrumbs([["Services", "/services/"], [s.title, `/services/${s.slug}/`]])]} />
     </>
   );
 }
