@@ -45,19 +45,22 @@ export function ServiceCard({ s, i = 0, as: Title = "h3" }: { s: Service; i?: nu
   return (
     <Reveal delay={(i % 3) * 0.08} className="h-full">
       <Spotlight className="glass h-full p-7 transition duration-300 hover:-translate-y-1 hover:border-brand-500/40">
-        <Link href={`/services/${s.slug}/`} className="relative flex h-full flex-col">
+        <div className="relative flex h-full flex-col">
           <div className="flex items-start justify-between">
             <div className="grid h-12 w-12 place-items-center rounded-xl border border-brand-500/30 bg-brand-500/10 text-brand-400">
               <Icon name={s.icon} className="h-6 w-6" />
             </div>
             <span className="text-[11px] uppercase tracking-[0.2em] text-white/35">{s.category}</span>
           </div>
-          <Title className="mt-6 font-display text-xl font-semibold text-white">{s.title}</Title>
+          <Title className="mt-6 font-display text-xl font-semibold text-white">
+            {/* The link covers the whole card, but its anchor text is only the service name. */}
+            <Link href={`/services/${s.slug}/`} className="after:absolute after:inset-0 after:content-['']">{s.title}</Link>
+          </Title>
           <p className="mt-3 flex-1 text-sm leading-relaxed text-white/60">{s.short}</p>
-          <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-400">
+          <span aria-hidden className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-400">
             Explore <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
           </span>
-        </Link>
+        </div>
       </Spotlight>
     </Reveal>
   );

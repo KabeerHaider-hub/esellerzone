@@ -3,10 +3,10 @@ import { pageMeta, JsonLd, ldFaq } from "@/lib/seo";
 import { faqs } from "@/lib/content";
 
 export const metadata = pageMeta({
-  title: "eSeller Zone | E-Commerce, Amazon & Web Development Agency",
+  title: "E-Commerce & Amazon Agency | eSeller Zone",
   absoluteTitle: true,
   description:
-    "E-commerce and digital growth agency for brands in the US, UK and worldwide: Amazon and Walmart management, Shopify stores, websites, apps, SEO, ads and social media.",
+    "E-commerce agency for US, UK and global brands: Amazon and Walmart management, Shopify stores, websites, SEO, ads and social media.",
   path: "/",
 });
 
