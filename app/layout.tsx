@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     : { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 } },
   // Paste verification codes into these env vars once Search Console / Bing Webmaster Tools give them to you.
   verification: {
-    ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } : {}),
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || site.googleSiteVerification,
     ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } } : {}),
   },
 };
