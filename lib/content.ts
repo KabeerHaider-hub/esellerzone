@@ -55,7 +55,7 @@ export const faqs = [
     a: "Always. Every build includes a support window, and we offer monthly care, management and growth plans after that.",
   },
   {
-    q: "Do you work with clients outside Pakistan?",
+    q: "Do you work with international clients?",
     a: "Most of our clients are in the US, UK and Europe. Our team works your business hours, so communication stays fast.",
   },
 ];
@@ -79,27 +79,27 @@ export type Post = {
 // Starter articles for SEO. Add new posts to this array; pages and the sitemap update automatically.
 export const posts: Post[] = [
   {
-    slug: "ecommerce-agency-pakistan",
+    slug: "outsource-ecommerce-management",
     services: ["marketplace-management", "ecommerce-development", "seo-services"],
-    title: "Hiring an E-Commerce Agency in Pakistan: A Guide for US and UK Brands",
-    excerpt: "Why US and UK sellers outsource Amazon, Shopify and marketing work to Pakistan, what it costs, and how to pick an agency you can trust.",
+    title: "How to Outsource E-Commerce Management: A Guide for US and UK Brands",
+    excerpt: "What to hand over to an e-commerce agency, what it costs, how to vet a partner, and the red flags that should end the conversation.",
     date: "2026-11-27",
     readMins: 7,
     category: "Outsourcing",
     body: [
-      { p: "Pakistan has become one of the busiest places in the world for e-commerce talent. Thousands of specialists manage Amazon, Walmart and Shopify stores for brands in the US, UK and Europe. If you are thinking about outsourcing to a Pakistani agency, here is what to expect and how to choose well." },
-      { h: "Why brands outsource e-commerce work to Pakistan", list: ["Deep marketplace experience: many teams have spent years running Amazon FBA, wholesale and private label accounts", "Lower cost than a US or UK in-house hire for the same skill set", "Strong English and teams that work US or UK business hours", "One agency can cover listings, PPC, web development, design and social media"] },
+      { p: "Running an online store means juggling marketplaces, ads, listings, a website and customer service at the same time. More and more brands in the US, UK and Europe hand that work to a specialist e-commerce agency instead of hiring a full in-house team. Here is what to expect and how to choose well." },
+      { h: "Why brands outsource e-commerce management", list: ["Deep marketplace experience: a good agency has run Amazon FBA, wholesale and private label accounts across many categories", "Lower cost than building an in-house team with the same range of skills", "A team that works your business hours, so problems get fixed the same day", "One partner can cover listings, PPC, web development, design and social media"] },
       { h: "What you can hand over", list: ["Amazon, Walmart, eBay, Etsy and TikTok Shop account management", "Product research, listing creation and A+ content", "PPC campaign management on Amazon, Google and Meta", "Shopify and WooCommerce store builds and maintenance", "SEO, content writing and social media management", "Customer service, order handling and reporting"] },
       { h: "What it costs", p: "Pricing depends on scope, but most agencies charge a monthly retainer for ongoing management and a fixed price for builds. At eSeller Zone, marketplace management starts at $499 a month, Shopify stores start at $999, and SEO starts at $849 a month. Ask every agency for a written scope so you can compare like with like." },
-      { h: "How to vet an agency", list: ["Ask for user permissions, never your main account password", "Ask who will actually work on your account and how many other accounts they manage", "Request examples or references in your product category", "Agree on reporting: which numbers, how often, and in which format", "Start with a trial month or a fixed project before a long contract", "Confirm you keep ownership of every account, listing, design file and line of code"] },
-      { h: "Time zones and communication", p: "Pakistan is 10 hours ahead of US Eastern time in winter and 5 hours ahead of the UK. Good agencies run evening and night shifts so they overlap with your working day. Our team works 5 PM to 1 AM Pakistan time, which covers US mornings and UK afternoons." },
+      { h: "How to vet an e-commerce agency", list: ["Ask for user permissions, never your main account password", "Ask who will actually work on your account and how many other accounts they manage", "Request examples or references in your product category", "Agree on reporting: which numbers, how often, and in which format", "Start with a trial month or a fixed project before a long contract", "Confirm you keep ownership of every account, listing, design file and line of code"] },
+      { h: "Time zones and communication", p: "Ask any agency which hours they work and how fast they reply. The best partners overlap with your working day and give you one point of contact. Our team works US mornings and UK afternoons, with weekly reports and a shared channel for quick questions." },
       { h: "Red flags", list: ["Guaranteed rankings, sales or 'page one in a week'", "Review manipulation or anything against marketplace terms", "No written contract or unclear payment terms", "Reluctance to put you on a call with the people doing the work"] },
-      { p: "eSeller Zone is based in Karachi and works with brands in the US, UK and Pakistan, with a partner company in Texas. Book a free strategy call and we'll show you exactly what we would do in your first 90 days." },
+      { p: "eSeller Zone is an e-commerce and digital growth agency working with brands in the US, UK and worldwide, with a partner company in Texas. Book a free strategy call and we'll show you exactly what we would do in your first 90 days." },
     ],
     faq: [
-      { q: "Is it safe to give a Pakistani agency access to my Amazon account?", a: "Yes, if you add them as a user in Seller Central with only the permissions they need. Never share your main login, and remove access when the work ends." },
-      { q: "Can a Pakistan-based agency work US hours?", a: "Yes. Most e-commerce agencies in Pakistan, including eSeller Zone, run evening shifts that overlap with the US and UK working day." },
-      { q: "How do I pay an agency in Pakistan?", a: "Most agencies invoice in US dollars and accept bank transfer, Payoneer, Wise or card payments. Agree the currency and payment terms in writing before you start." },
+      { q: "Is it safe to give an agency access to my Amazon account?", a: "Yes, if you add them as a user in Seller Central with only the permissions they need. Never share your main login, and remove access when the work ends." },
+      { q: "Can an outsourced e-commerce team work US or UK hours?", a: "Yes. Good agencies, including eSeller Zone, schedule their team so it overlaps with the US and UK working day." },
+      { q: "How do I pay an e-commerce agency?", a: "Most agencies invoice in US dollars and accept bank transfer, Payoneer, Wise or card payments. Agree the currency and payment terms in writing before you start." },
     ],
   },
   {

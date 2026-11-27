@@ -40,7 +40,8 @@ export function PageHero({ eyebrow, title, text, children, eyebrowIsH1 = false }
   );
 }
 
-export function ServiceCard({ s, i = 0 }: { s: Service; i?: number }) {
+/** `as="p"` on pages where another section already lists the services as headings, to avoid duplicate headings. */
+export function ServiceCard({ s, i = 0, as: Title = "h3" }: { s: Service; i?: number; as?: "h3" | "p" }) {
   return (
     <Reveal delay={(i % 3) * 0.08} className="h-full">
       <Spotlight className="glass h-full p-7 transition duration-300 hover:-translate-y-1 hover:border-brand-500/40">
@@ -51,7 +52,7 @@ export function ServiceCard({ s, i = 0 }: { s: Service; i?: number }) {
             </div>
             <span className="text-[11px] uppercase tracking-[0.2em] text-white/35">{s.category}</span>
           </div>
-          <h3 className="mt-6 font-display text-xl font-semibold text-white">{s.title}</h3>
+          <Title className="mt-6 font-display text-xl font-semibold text-white">{s.title}</Title>
           <p className="mt-3 flex-1 text-sm leading-relaxed text-white/60">{s.short}</p>
           <span className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-400">
             Explore <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />

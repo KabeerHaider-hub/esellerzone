@@ -8,9 +8,9 @@ import { pageMeta, JsonLd, ldBreadcrumbs } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = pageMeta({
-  title: "About Us: E-Commerce & Digital Agency in Karachi",
+  title: "About Us: E-Commerce & Digital Growth Agency",
   description:
-    "Meet eSeller Zone: a Karachi-based e-commerce, web development and marketing team, partnered with Zenvyra Digital in the US, growing brands that sell online.",
+    "Meet eSeller Zone: an e-commerce, web development and digital marketing agency, partnered with Zenvyra Digital in the US, growing brands across the US, UK and worldwide.",
   path: "/about/",
 });
 
