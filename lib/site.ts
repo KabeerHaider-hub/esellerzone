@@ -56,6 +56,8 @@ export const site = {
   ],
   // Google Search Console ownership token (public by design; it appears in every page's <head>).
   googleSiteVerification: "fn9Y3V42TFSStuxpCDpWYsdNMhePRa0di2x3ef-DZeQ",
+  // Google Analytics 4 measurement ID (property "esellerzone.com"). NEXT_PUBLIC_GA_ID overrides it.
+  gaMeasurementId: "G-5KDPQ4PN2R",
   // Optional: set NEXT_PUBLIC_FORM_ENDPOINT (e.g. a Formspree URL) to receive form posts.
   formEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "",
 };

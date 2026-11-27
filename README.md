@@ -52,5 +52,5 @@ Optional environment variables (set them in Vercel → Settings → Environment 
 |---|---|
 | `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | Google Search Console HTML-tag verification code |
 | `NEXT_PUBLIC_BING_SITE_VERIFICATION` | Bing Webmaster Tools verification code |
-| `NEXT_PUBLIC_GA_ID` | Google Analytics 4 measurement ID (e.g. `G-XXXXXXX`) |
+| `NEXT_PUBLIC_GA_ID` | Overrides the Google Analytics 4 ID (default `G-5KDPQ4PN2R` in lib/site.ts) |
 | `NEXT_PUBLIC_NOINDEX` | Set to `1` to keep a build out of search engines |
