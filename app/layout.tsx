@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Sora, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -9,8 +9,9 @@ import { site } from "@/lib/site";
 import { JsonLd, ldSiteGraph, defaultOgImage, isPreviewBuild } from "@/lib/seo";
 import { Analytics } from "@/components/Analytics";
 
-const display = Sora({ subsets: ["latin"], variable: "--font-display", weight: ["400", "500", "600", "700"] });
-const body = Inter({ subsets: ["latin"], variable: "--font-body" });
+// Fonts are self-hosted (app/fonts, SIL Open Font License) so builds never depend on reaching Google Fonts.
+const display = localFont({ src: "./fonts/sora-latin-wght-normal.woff2", variable: "--font-display", weight: "100 800", display: "swap" });
+const body = localFont({ src: "./fonts/inter-latin-wght-normal.woff2", variable: "--font-body", weight: "100 900", display: "swap" });
 
 const base = process.env.NEXT_PUBLIC_BASE_PATH || "";
 
