@@ -54,6 +54,8 @@ export const site = {
     { label: "Facebook", href: "https://www.facebook.com/ESellerZone" },
     { label: "Instagram", href: "https://www.instagram.com/esellerzone/" },
   ],
+  // Google Search Console ownership token (public by design; it appears in every page's <head>).
+  googleSiteVerification: "fn9Y3V42TFSStuxpCDpWYsdNMhePRa0di2x3ef-DZeQ",
   // Optional: set NEXT_PUBLIC_FORM_ENDPOINT (e.g. a Formspree URL) to receive form posts.
   formEndpoint: process.env.NEXT_PUBLIC_FORM_ENDPOINT ?? "",
 };
