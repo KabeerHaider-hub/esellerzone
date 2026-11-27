@@ -8,7 +8,7 @@ export const site = {
   email: "info@esellerzone.com",
   phone: "+1 707-786-3133", // US line via Zenvyra Digital; Karachi number is offices[0].phone
   whatsapp: "", // digits only, e.g. "923000000000"
-  address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 74500, Pakistan",
+  address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 75400, Pakistan",
   hours: "Mon to Sat, 5 PM to 1 AM (PKT). Sunday closed.",
   // Offices: Karachi (eSeller Zone) and the US office of our partner company, Zenvyra Digital.
   offices: [
@@ -16,13 +16,13 @@ export const site = {
       id: "karachi",
       label: "Pakistan office",
       city: "Karachi",
-      address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 74500, Pakistan",
+      address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 75400, Pakistan",
       phone: "+92 333 3128078",
       // Structured address for Google (schema.org). Keep it identical to Google Business Profile and directory listings.
       street: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2",
       locality: "Karachi",
       region: "Sindh",
-      postalCode: "74500",
+      postalCode: "75400",
       country: "PK",
     },
     {
