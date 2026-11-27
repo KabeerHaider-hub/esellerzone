@@ -54,14 +54,15 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
           {!cosmic && <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-ink-950 to-transparent" />}
 
           <HeroCopy>
-            <FadeIn delay={0.2}><span className="eyebrow">
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-500" /> E-commerce & digital growth agency
-            </span></FadeIn>
-            <h1 className="h-display mt-8 text-[2.9rem] leading-[0.98] sm:text-7xl lg:text-[6.2rem]">
+            {/* The keyword line is the page's <h1>; the big slogan below is styled text. */}
+            <FadeIn delay={0.2}><h1 className="eyebrow">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-500" /> E-commerce, web development &amp; social media agency
+            </h1></FadeIn>
+            <p className="h-display mt-8 text-[2.9rem] leading-[0.98] sm:text-7xl lg:text-[6.2rem]">
               <SplitReveal text="We grow your business," delay={0.15} />
               <br />
               <SplitReveal text="not your expenses." delay={0.55} accentFrom={0} />
-            </h1>
+            </p>
             <FadeIn delay={1.1} className="mt-8 max-w-xl text-lg leading-relaxed text-white/60">
               Marketplaces, stores, websites, AI and marketing, run by one team that only wins when you do.
             </FadeIn>

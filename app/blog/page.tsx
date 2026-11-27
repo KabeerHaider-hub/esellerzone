@@ -4,8 +4,14 @@ import { PageHero, CtaBand } from "@/components/Sections";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 import { posts } from "@/lib/content";
+import { pageMeta, JsonLd, ldBreadcrumbs } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Blog", description: "Guides on Amazon, e-commerce, SEO, paid ads and AI automation for online sellers." };
+export const metadata: Metadata = pageMeta({
+  title: "Blog: Amazon, E-Commerce, SEO & Marketing Guides",
+  description:
+    "Practical guides for online sellers and growing brands: Amazon listings, Shopify and custom stores, SEO, paid ads, social media and AI automation.",
+  path: "/blog/",
+});
 
 const fmt = (d: string) => new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
 
@@ -43,6 +49,7 @@ export default function Blog() {
         </div>
       </section>
       <CtaBand />
+      <JsonLd data={ldBreadcrumbs([["Blog", "/blog/"]])} />
     </>
   );
 }

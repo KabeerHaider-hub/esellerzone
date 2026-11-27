@@ -4,11 +4,15 @@ import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
 import { LogoStacked } from "@/components/Logo";
 import { PartnerCard } from "@/components/PartnerCard";
+import { pageMeta, JsonLd, ldBreadcrumbs } from "@/lib/seo";
+import { site } from "@/lib/site";
 
-export const metadata: Metadata = {
-  title: "About",
-  description: "eSeller Zone is an all-in-one digital and e-commerce growth partner for brands selling online.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "About Us: E-Commerce & Digital Agency in Karachi",
+  description:
+    "Meet eSeller Zone: a Karachi-based e-commerce, web development and marketing team, partnered with Zenvyra Digital in the US, growing brands that sell online.",
+  path: "/about/",
+});
 
 const values = [
   { t: "Mission", d: "Make world-class e-commerce, technology and marketing accessible to growing brands, without the bloated agency price tag." },
@@ -66,6 +70,7 @@ export default function About() {
 
       {/* TODO(owner): add real team members and photos here when ready. */}
       <CtaBand title="Let's build what's next, together." />
+      <JsonLd data={[ldBreadcrumbs([["About", "/about/"]]), { "@context": "https://schema.org", "@type": "AboutPage", url: `${site.domain}/about/`, about: { "@id": `${site.domain}/#organization` } }]} />
     </>
   );
 }

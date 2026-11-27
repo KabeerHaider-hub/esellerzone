@@ -16,6 +16,10 @@ export type Package = { name: string; price: string; note: string; features: str
 export type Service = {
   slug: string;
   title: string;
+  /** Search-friendly <title> (the " | eSeller Zone" suffix is added automatically). Aim for under 50 characters. */
+  seoTitle?: string;
+  /** Meta description for Google, 120 to 160 characters. Falls back to `intro`. */
+  seoDescription?: string;
   short: string;
   icon: IconName;
   category: "Commerce" | "Build" | "Growth" | "Create";
@@ -33,6 +37,9 @@ export const services: Service[] = [
   {
     slug: "marketplace-management",
     title: "Marketplace Management",
+    seoTitle: "Amazon, Walmart & eBay Account Management",
+    seoDescription:
+      "Amazon, Walmart, eBay, TikTok Shop and Etsy account management: listings, PPC, sourcing, orders and account health, run end to end by eSeller Zone.",
     short: "Amazon, Walmart, eBay and TikTok Shop, run end to end: listings, sourcing, ads and account health.",
     icon: "store",
     category: "Commerce",
@@ -65,6 +72,9 @@ export const services: Service[] = [
   {
     slug: "ecommerce-development",
     title: "E-Commerce Store Development",
+    seoTitle: "Shopify & Custom E-Commerce Store Development",
+    seoDescription:
+      "Shopify and custom e-commerce store development: conversion-focused design, payments, inventory sync and automation. Starting packages from $999.",
     short: "Shopify and custom stores built to convert, with payments, inventory and automation wired in.",
     icon: "cart",
     category: "Commerce",
@@ -97,6 +107,9 @@ export const services: Service[] = [
   {
     slug: "website-development",
     title: "Website Design & Development",
+    seoTitle: "Website Design & Development Company",
+    seoDescription:
+      "Custom website design and development in Next.js, React and WordPress: fast, responsive, SEO-ready sites built to turn visitors into customers.",
     short: "Responsive, lightning-fast websites engineered to turn visitors into customers.",
     icon: "code",
     category: "Build",
@@ -119,6 +132,9 @@ export const services: Service[] = [
   {
     slug: "mobile-app-development",
     title: "Mobile App Development",
+    seoTitle: "iOS & Android Mobile App Development",
+    seoDescription:
+      "iOS, Android and cross-platform mobile app development: UI/UX, APIs, testing, store submission and maintenance. Packages from $2,499.",
     short: "iOS, Android and cross-platform apps that are secure, scalable and a joy to use.",
     icon: "phone",
     category: "Build",
@@ -146,6 +162,9 @@ export const services: Service[] = [
   {
     slug: "software-solutions",
     title: "Software Solutions",
+    seoTitle: "Custom Software, CRM & POS Development",
+    seoDescription:
+      "Custom business software: CRM, POS, inventory and workflow systems and dashboards built around how your team actually works.",
     short: "Custom CRM, POS, inventory systems and dashboards that simplify, automate and scale.",
     icon: "cpu",
     category: "Build",
@@ -173,6 +192,9 @@ export const services: Service[] = [
   {
     slug: "ai-automation",
     title: "AI & Automation",
+    seoTitle: "AI Automation, Chatbots & AI Agents",
+    seoDescription:
+      "AI agents, chatbots and workflow automation for online sellers and service businesses: connect your tools, answer customers 24/7, save hours.",
     short: "AI agents, chatbots and workflow automation that give your team hours back every week.",
     icon: "bot",
     category: "Build",
@@ -195,6 +217,9 @@ export const services: Service[] = [
   {
     slug: "seo-services",
     title: "SEO Services",
+    seoTitle: "SEO Services: Technical, Local & E-Commerce SEO",
+    seoDescription:
+      "Technical, on-page, off-page and local SEO for e-commerce stores and service businesses. Rank higher, win qualified traffic and grow month after month.",
     short: "Technical, on-page, off-page and local SEO that compounds into long-term organic growth.",
     icon: "search",
     category: "Growth",
@@ -222,6 +247,9 @@ export const services: Service[] = [
   {
     slug: "ppc-paid-advertising",
     title: "PPC & Paid Advertising",
+    seoTitle: "PPC Management: Google, Meta & Amazon Ads",
+    seoDescription:
+      "PPC management for Google Ads, Meta (Facebook and Instagram) and Amazon Ads, optimised for ROAS and cost per acquisition with transparent reporting.",
     short: "Google, Meta, Amazon and shopping campaigns tuned for return on ad spend.",
     icon: "target",
     category: "Growth",
@@ -249,6 +277,9 @@ export const services: Service[] = [
   {
     slug: "social-media-marketing",
     title: "Social Media Marketing",
+    seoTitle: "Social Media Marketing & Management Agency",
+    seoDescription:
+      "Social media marketing and management for Instagram, Facebook, TikTok and LinkedIn: content, community and paid campaigns that grow sales.",
     short: "Content, community and campaigns that grow awareness, engagement and sales.",
     icon: "megaphone",
     category: "Growth",
@@ -276,6 +307,9 @@ export const services: Service[] = [
   {
     slug: "branding-creative",
     title: "Branding & Creative",
+    seoTitle: "Branding, Logo Design & Creative Services",
+    seoDescription:
+      "Branding and creative services: logo design, brand identity, packaging, social creatives and motion graphics that make your brand memorable.",
     short: "Logos, identities, packaging and motion that make your brand impossible to forget.",
     icon: "pen",
     category: "Create",
@@ -303,6 +337,9 @@ export const services: Service[] = [
   {
     slug: "ebook-writing-publishing",
     title: "eBook Writing & Publishing",
+    seoTitle: "eBook Ghostwriting, Editing & Publishing",
+    seoDescription:
+      "eBook ghostwriting, editing, cover design, formatting and publishing on Amazon KDP and other stores, plus book marketing and audiobooks.",
     short: "Ghostwriting, editing, covers, formatting and distribution, from idea to bestseller list.",
     icon: "book",
     category: "Create",

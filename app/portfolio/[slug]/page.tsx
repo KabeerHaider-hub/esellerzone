@@ -6,6 +6,7 @@ import { Reveal } from "@/components/Reveal";
 import { Spotlight } from "@/components/Spotlight";
 import { Icon } from "@/components/Icon";
 import { chapters, getChapter } from "@/lib/portfolio";
+import { pageMeta, JsonLd, ldBreadcrumbs } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,7 +16,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const c = getChapter((await params).slug);
-  return c ? { title: `${c.title} Portfolio`, description: c.intro } : {};
+  return c ? pageMeta({ title: `${c.title} Portfolio`, description: c.intro, path: `/portfolio/${c.slug}/` }) : {};
 }
 
 export default async function ChapterPage({ params }: Props) {
@@ -88,6 +89,7 @@ export default async function ChapterPage({ params }: Props) {
       </section>
 
       <CtaBand title={`Let's build your ${c.title.toLowerCase()} success story.`} />
+      <JsonLd data={ldBreadcrumbs([["Portfolio", "/portfolio/"], [c.title, `/portfolio/${c.slug}/`]])} />
     </>
   );
 }

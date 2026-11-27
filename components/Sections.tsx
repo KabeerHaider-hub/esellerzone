@@ -17,15 +17,21 @@ export function SectionHeading({ eyebrow, title, text, center = false }: { eyebr
   );
 }
 
-export function PageHero({ eyebrow, title, text, children }: { eyebrow: string; title: ReactNode; text?: string; children?: ReactNode }) {
+/**
+ * Page hero. By default the big title is the page's <h1>. Set `eyebrowIsH1` when the eyebrow holds the
+ * keyword (e.g. "SEO Services") and the big title is a slogan: the eyebrow becomes the <h1>, looks unchanged.
+ */
+export function PageHero({ eyebrow, title, text, children, eyebrowIsH1 = false }: { eyebrow: string; title: ReactNode; text?: string; children?: ReactNode; eyebrowIsH1?: boolean }) {
+  const Eyebrow = eyebrowIsH1 ? "h1" : "span";
+  const Title = eyebrowIsH1 ? "p" : "h1";
   return (
     <section className="relative overflow-hidden pb-16 pt-40 sm:pt-44">
       <div className="grid-bg pointer-events-none absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black_20%,transparent_70%)]" />
       <div className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[820px] max-w-full -translate-x-1/2 rounded-full bg-brand-500/20 blur-[120px]" />
       <div className="container-x relative">
         <Reveal>
-          <span className="eyebrow">{eyebrow}</span>
-          <h1 className="h-display mt-6 max-w-4xl text-4xl leading-[1.05] sm:text-6xl">{title}</h1>
+          <Eyebrow className="eyebrow">{eyebrow}</Eyebrow>
+          <Title className="h-display mt-6 max-w-4xl text-4xl leading-[1.05] sm:text-6xl">{title}</Title>
           {text && <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/60">{text}</p>}
           {children}
         </Reveal>

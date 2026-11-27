@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/Sections";
 import { site } from "@/lib/site";
+import { pageMeta } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Terms & Privacy", description: `Terms of use and privacy policy for ${site.name}.` };
+export const metadata: Metadata = pageMeta({
+  title: "Terms & Privacy Policy",
+  description: `Terms of use and privacy policy for ${site.name}: how we quote and deliver work, who owns what, and how we handle the details you send us.`,
+  path: "/terms/",
+});
 
 // TODO(owner): have these reviewed by your legal advisor before launch.
 const sections = [

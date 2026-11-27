@@ -13,8 +13,31 @@ export const site = {
   hours: "Mon to Sat, 5 PM to 1 AM (PKT). Sunday closed.",
   // Offices: Karachi (eSeller Zone) and the US office of our partner company, Zenvyra Digital.
   offices: [
-    { label: "Pakistan office", city: "Karachi", address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 74500, Pakistan", phone: "" },
-    { label: "US office", city: "Missouri City, TX", address: "5680 Highway 6, #253, Missouri City, TX 77459, United States", phone: "+1 707-786-3133" },
+    {
+      id: "karachi",
+      label: "Pakistan office",
+      city: "Karachi",
+      address: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2, Karachi 74500, Pakistan",
+      phone: "",
+      // Structured address for Google (schema.org). Keep it identical to Google Business Profile and directory listings.
+      street: "Tariq Center, Office 211, Tariq Rd, P.E.C.H.S Block 2",
+      locality: "Karachi",
+      region: "Sindh",
+      postalCode: "74500",
+      country: "PK",
+    },
+    {
+      id: "us",
+      label: "US office",
+      city: "Missouri City, TX",
+      address: "5680 Highway 6, #253, Missouri City, TX 77459, United States",
+      phone: "+1 707-786-3133",
+      street: "5680 Highway 6, #253",
+      locality: "Missouri City",
+      region: "TX",
+      postalCode: "77459",
+      country: "US",
+    },
   ],
   partner: {
     name: "Zenvyra Digital",
@@ -23,6 +46,11 @@ export const site = {
     address: "5680 Highway 6, #253, Missouri City, TX 77459, United States",
     phone: "+1 707-786-3133",
   },
+  // Opening hours in schema.org form (PKT). Closing after midnight is fine: Google reads 17:00-01:00 as overnight.
+  openingHours: { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "17:00", closes: "01:00" },
+  // Countries we serve (ISO codes), used in structured data.
+  areaServed: ["US", "GB", "CA", "AU", "AE", "PK"],
+  // Add every official profile here (LinkedIn, YouTube, TikTok, Clutch, etc.). They feed the footer and Google's sameAs.
   socials: [
     { label: "Facebook", href: "https://www.facebook.com/ESellerZone" },
     { label: "Instagram", href: "https://www.instagram.com/esellerzone/" },

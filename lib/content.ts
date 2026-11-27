@@ -65,6 +65,10 @@ export type Post = {
   title: string;
   excerpt: string;
   date: string;
+  /** Last meaningful update (YYYY-MM-DD). Shown to Google as dateModified. */
+  updated?: string;
+  /** Related service slugs, linked at the end of the article. */
+  services?: string[];
   readMins: number;
   category: string;
   body: { h?: string; p?: string; list?: string[] }[];
@@ -74,6 +78,7 @@ export type Post = {
 export const posts: Post[] = [
   {
     slug: "amazon-listing-optimization-guide",
+    services: ["marketplace-management", "ppc-paid-advertising"],
     title: "Amazon Listing Optimization: A Practical Guide for 2026",
     excerpt: "Titles, bullets, images and backend keywords: the listing fundamentals that still move rankings and conversion on Amazon.",
     date: "2026-11-10",
@@ -91,6 +96,7 @@ export const posts: Post[] = [
   },
   {
     slug: "shopify-vs-custom-store",
+    services: ["ecommerce-development", "website-development"],
     title: "Shopify vs a Custom E-Commerce Store: Which Is Right for You?",
     excerpt: "Speed to launch, cost, flexibility and scale. How to pick the platform that matches your stage of growth.",
     date: "2026-10-28",
@@ -106,6 +112,7 @@ export const posts: Post[] = [
   },
   {
     slug: "ai-automation-for-online-sellers",
+    services: ["ai-automation", "software-solutions"],
     title: "5 AI Automations Every Online Seller Should Set Up",
     excerpt: "From customer replies to inventory alerts, these automations save hours each week without adding headcount.",
     date: "2026-10-14",
@@ -122,6 +129,7 @@ export const posts: Post[] = [
   },
   {
     slug: "local-seo-checklist",
+    services: ["seo-services", "website-development"],
     title: "The Small Business SEO Checklist That Actually Moves Rankings",
     excerpt: "Skip the noise. These are the technical, on-page and local SEO tasks with the biggest impact for small businesses.",
     date: "2026-09-30",

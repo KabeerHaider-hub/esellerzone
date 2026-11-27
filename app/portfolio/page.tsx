@@ -6,11 +6,14 @@ import { Reveal } from "@/components/Reveal";
 import { Spotlight } from "@/components/Spotlight";
 import { Icon } from "@/components/Icon";
 import { chapters } from "@/lib/portfolio";
+import { pageMeta, JsonLd, ldBreadcrumbs } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Website design & development, marketplace management, e-commerce, social media, SEO, ads and branding work by eSeller Zone.",
-};
+export const metadata: Metadata = pageMeta({
+  title: "Portfolio: Web Design, E-Commerce & Marketing Work",
+  description:
+    "See eSeller Zone's work in website design and development, Amazon and marketplace management, e-commerce stores, social media, SEO, ads and branding.",
+  path: "/portfolio/",
+});
 
 export default function Portfolio() {
   return (
@@ -36,6 +39,7 @@ export default function Portfolio() {
         </div>
       </section>
       <CtaBand title="Your brand could be the next station." />
+      <JsonLd data={ldBreadcrumbs([["Portfolio", "/portfolio/"]])} />
     </>
   );
 }
