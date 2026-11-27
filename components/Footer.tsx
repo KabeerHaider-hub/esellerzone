@@ -51,9 +51,9 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/5">
-        <div className="container-x flex flex-col items-center justify-between gap-2 py-6 text-xs text-white/40 sm:flex-row">
+        <div className="container-x flex flex-col items-center justify-between gap-2 py-6 text-xs text-white/60 sm:flex-row">
           <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-          <p>Partner company: <a href={site.partner.url} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-brand-400">{site.partner.name}</a></p>
+          <p>Partner company: <a href={site.partner.url} target="_blank" rel="noopener noreferrer" className="text-white/80 underline underline-offset-2 hover:text-brand-400">{site.partner.name}</a></p>
           <p>Built for growth. Engineered for the future.</p>
         </div>
       </div>

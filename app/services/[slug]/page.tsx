@@ -28,7 +28,7 @@ export default async function ServicePage({ params }: Props) {
   const s = getService((await params).slug);
   if (!s) notFound();
   const others = services.filter((x) => x.slug !== s.slug);
-  const reading = posts.filter((p) => p.services?.includes(s.slug));
+  const reading = posts.filter((p) => p.services?.includes(s.slug)).slice(0, 4);
   const more = [...others.filter((x) => x.category === s.category), ...others.filter((x) => x.category !== s.category)].slice(0, 3);
 
   return (
@@ -66,12 +66,12 @@ export default async function ServicePage({ params }: Props) {
         <SectionHeading eyebrow="Why choose us" title={<>Why brands pick <span className="text-gradient">eSeller Zone.</span></>} />
         <ul className="space-y-3">
           {s.why.map((w, i) => (
-            <Reveal key={w} delay={i * 0.06}>
-              <li className="glass flex items-center gap-4 p-5 text-white/80">
+            <li key={w}>
+              <Reveal delay={i * 0.06} className="glass flex items-center gap-4 p-5 text-white/80">
                 <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-brand-500/15 text-brand-400"><Icon name="check" className="h-5 w-5" /></span>
                 {w}
-              </li>
-            </Reveal>
+              </Reveal>
+            </li>
           ))}
         </ul>
       </section>

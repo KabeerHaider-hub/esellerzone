@@ -73,10 +73,10 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
           </HeroCopy>
 
           <div className="container-x relative mt-auto flex items-end justify-between pb-10">
-            <div className="flex items-center gap-4 text-[11px] uppercase tracking-[0.3em] text-white/40">
+            <div className="flex items-center gap-4 text-[11px] uppercase tracking-[0.3em] text-white/60">
               <span className="scroll-cue relative block h-12 w-px overflow-hidden bg-white/15" /> Scroll
             </div>
-            <div className="hidden gap-10 text-right text-xs text-white/40 sm:flex">
+            <div className="hidden gap-10 text-right text-xs text-white/60 sm:flex">
               <p><span className="block font-display text-2xl text-white">11</span>services</p>
               <p><span className="block font-display text-2xl text-white">6+</span>platforms</p>
               <p><span className="block font-display text-2xl text-white">24h</span>reply time</p>
@@ -88,7 +88,7 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
         <div className="relative border-y border-white/10 bg-ink-900/60 py-5 backdrop-blur">
           <div className="flex w-max animate-marquee gap-12 whitespace-nowrap">
             {[...marketplaces, ...marketplaces].map((m, i) => (
-              <span key={i} className="flex items-center gap-12 font-display text-lg font-medium text-white/40">
+              <span key={i} className="flex items-center gap-12 font-display text-lg font-medium text-white/60">
                 {m} <span className="h-1.5 w-1.5 rotate-45 bg-brand-500/70" />
               </span>
             ))}
