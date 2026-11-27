@@ -60,7 +60,10 @@ function Word({ children, progress, range, accent }: { children: string; progres
   );
 }
 
-/** Pinned section: services slide horizontally while the page scrolls vertically (desktop). */
+/**
+ * Services list. Desktop: pinned section where the cards slide horizontally while the page scrolls.
+ * Below lg: the same cards as a plain grid, so the page holds one copy of each link and heading.
+ */
 export function HorizontalServices({ services }: { services: Service[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
@@ -68,7 +71,7 @@ export function HorizontalServices({ services }: { services: Service[] }) {
   useEffect(() => {
     const measure = () => {
       const el = track.current;
-      if (el) setDist(Math.max(0, el.scrollWidth - window.innerWidth + 64));
+      if (el) setDist(window.innerWidth >= 1024 ? Math.max(0, el.scrollWidth - window.innerWidth + 64) : 0);
     };
     measure();
     window.addEventListener("resize", measure);
@@ -79,48 +82,57 @@ export function HorizontalServices({ services }: { services: Service[] }) {
   const bar = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <>
-      {/* desktop: pinned horizontal scroll */}
-      <section ref={ref} className="relative hidden lg:block" style={{ height: `${services.length * 38}vh` }}>
-        <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-          <div className="container-x flex items-end justify-between">
-            <div>
-              <span className="eyebrow">What we do</span>
-              <h2 className="h-display mt-5 text-5xl">Eleven e-commerce &amp; digital services. <span className="text-white/40">One team.</span></h2>
-            </div>
-            <Link href="/services/" className="btn-ghost">All services <Icon name="arrow" className="h-4 w-4" /></Link>
+    <section
+      ref={ref}
+      className="relative lg:h-[var(--pin-h)]"
+      style={{ ["--pin-h" as string]: `${services.length * 38}vh` }}
+    >
+      <div className="flex flex-col justify-center lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden">
+        <div className="container-x flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <span className="eyebrow">What we do</span>
+            <h2 className="h-display mt-5 text-3xl leading-tight sm:text-4xl lg:text-5xl">E-commerce, web &amp; marketing services. <span className="text-white/40">One team.</span></h2>
           </div>
-          <motion.div ref={track} style={{ x }} className="mt-12 flex w-max gap-6 pl-[max(2rem,calc((100vw-80rem)/2+2rem))]">
+          <Link href="/services/" className="btn-ghost shrink-0 self-start md:self-auto">All services <Icon name="arrow" className="h-4 w-4" /></Link>
+        </div>
+        <div className="container-x lg:max-w-none lg:px-0">
+          <motion.div
+            ref={track}
+            style={{ x }}
+            className="mt-12 grid gap-5 sm:grid-cols-2 lg:flex lg:w-max lg:gap-6 lg:pl-[max(2rem,calc((100vw-80rem)/2+2rem))]"
+          >
             {services.map((s, i) => (
-              <Link
+              <div
                 key={s.slug}
-                href={`/services/${s.slug}/`}
-                className="group relative flex h-[420px] w-[380px] shrink-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-ink-900/60 p-8 backdrop-blur-md transition hover:border-brand-500/50"
+                className="group relative flex shrink-0 flex-col overflow-hidden rounded-3xl border border-white/10 bg-ink-900/60 p-7 backdrop-blur-md transition hover:border-brand-500/50 lg:h-[420px] lg:w-[380px] lg:p-8"
               >
                 <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-brand-500/0 blur-3xl transition duration-500 group-hover:bg-brand-500/30" />
                 <div className="flex items-center justify-between">
                   <span className="font-display text-sm text-white/35">{String(i + 1).padStart(2, "0")} / {services.length}</span>
                   <span className="text-[11px] uppercase tracking-[0.2em] text-white/35">{s.category}</span>
                 </div>
-                <div className="mt-10 grid h-14 w-14 place-items-center rounded-2xl border border-brand-500/30 bg-brand-500/10 text-brand-400 transition group-hover:bg-brand-500 group-hover:text-ink-950">
+                <div className="mt-8 grid h-14 w-14 place-items-center rounded-2xl border border-brand-500/30 bg-brand-500/10 text-brand-400 transition group-hover:bg-brand-500 group-hover:text-ink-950 lg:mt-10">
                   <Icon name={s.icon} className="h-7 w-7" />
                 </div>
-                <h3 className="mt-8 font-display text-2xl font-semibold text-white">{s.title}</h3>
+                <h3 className="mt-8 font-display text-2xl font-semibold text-white">
+                  {/* The link covers the whole card, but its text (the anchor text) is only the service name. */}
+                  <Link href={`/services/${s.slug}/`} className="after:absolute after:inset-0 after:content-['']">{s.title}</Link>
+                </h3>
                 <p className="mt-3 flex-1 text-white/55">{s.short}</p>
-                <span className="inline-flex items-center gap-2 text-sm font-medium text-brand-400">
+                <span aria-hidden className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-400">
                   Learn more <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
                 </span>
-              </Link>
+              </div>
             ))}
           </motion.div>
-          <div className="container-x mt-12">
-            <div className="h-px w-full bg-white/10">
-              <motion.div style={{ width: bar }} className="h-px bg-brand-500 shadow-[0_0_10px_rgba(255,89,13,0.9)]" />
-            </div>
+        </div>
+        <div className="container-x mt-12 hidden lg:block">
+          <div className="h-px w-full bg-white/10">
+            <motion.div style={{ width: bar }} className="h-px bg-brand-500 shadow-[0_0_10px_rgba(255,89,13,0.9)]" />
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
 

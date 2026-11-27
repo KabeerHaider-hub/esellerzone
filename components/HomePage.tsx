@@ -4,7 +4,7 @@ import { HeroCopy, FadeIn } from "@/components/HeroCopy";
 import { SplitReveal, Magnetic, KineticBand, ScaleIn } from "@/components/Experience";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
-import { SectionHeading, ServiceCard, CtaBand, ProcessSteps } from "@/components/Sections";
+import { SectionHeading, CtaBand, ProcessSteps } from "@/components/Sections";
 import { Spotlight } from "@/components/Spotlight";
 import { services } from "@/lib/services";
 import { ScrollText, HorizontalServices, CountUp, Parallax } from "@/components/ScrollFx";
@@ -64,11 +64,11 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
               <SplitReveal text="not your expenses." delay={0.55} accentFrom={0} />
             </p>
             <FadeIn delay={1.1} className="mt-8 max-w-xl text-lg leading-relaxed text-white/60">
-              Marketplaces, stores, websites, AI and marketing, run by one team that only wins when you do.
+              An e-commerce and digital marketing agency for US, UK and global brands: marketplaces, stores, websites, AI and marketing, run by one team that only wins when you do.
             </FadeIn>
             <FadeIn delay={1.3} className="mt-10 flex flex-col gap-3 sm:flex-row">
-              <Magnetic><Link href="/contact/" className="btn-primary">Book a free strategy call <Icon name="arrow" className="h-4 w-4" /></Link></Magnetic>
-              <Magnetic><Link href="/services/" className="btn-ghost">Explore services</Link></Magnetic>
+              <Magnetic><Link href="/contact/" className="btn-primary">Get a free growth plan <Icon name="arrow" className="h-4 w-4" /></Link></Magnetic>
+              <Magnetic><Link href="/services/" className="btn-ghost">See what we do</Link></Magnetic>
             </FadeIn>
           </HeroCopy>
 
@@ -156,18 +156,8 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
 
       <KineticBand words={["Sell", "Build", "Grow", "Automate"]} />
 
-      {/* SERVICES: pinned horizontal scroll on desktop */}
-      <div className="mt-24"><HorizontalServices services={services} /></div>
-      <section className="container-x mt-32 lg:hidden">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-          <SectionHeading eyebrow="What we do" title={<>E-commerce, web &amp; marketing services <span className="text-gradient">built for modern sellers.</span></>} />
-          <Reveal><Link href="/services/" className="btn-ghost shrink-0">All services <Icon name="arrow" className="h-4 w-4" /></Link></Reveal>
-        </div>
-        <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.slice(0, 6).map((s, i) => <ServiceCard key={s.slug} s={s} i={i} as="p" />)}
-        </div>
-      </section>
-
+      {/* SERVICES: pinned horizontal scroll on desktop, grid below lg */}
+      <div className="mt-24 lg:mt-24"><HorizontalServices services={services} /></div>
       {/* PROCESS */}
       <section className="container-x mt-32">
         <SectionHeading eyebrow="Our process" title={<>Our growth process: from first call <span className="text-gradient">to compounding sales.</span></>} text="A clear, repeatable process so you always know what's happening, what's next and what it's delivering." />
@@ -203,15 +193,17 @@ export function HomePage({ variant = "classic" }: { variant?: "classic" | "cosmi
           {chapters.slice(0, 3).map((c, i) => (
             <Parallax key={c.slug} speed={[30, 70, 45][i]}>
               <Spotlight className="glass h-full p-7">
-                <Link href={`/portfolio/${c.slug}/`} className="relative block">
+                <div className="relative block">
                   <div className="relative grid aspect-[16/10] place-items-center overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-brand-500/20 via-ink-800 to-ink-900">
                     <div className="grid-bg absolute inset-0 opacity-50" />
                     <span className="relative font-mono text-4xl font-semibold tracking-[0.2em] text-white/80">{c.code}</span>
                   </div>
                   <p className="mt-6 font-mono text-xs tracking-[0.25em] text-brand-400">{String(i + 1).padStart(2, "0")} · CHAPTER</p>
-                  <h3 className="mt-2 font-display text-lg font-semibold text-white">{c.title}</h3>
+                  <p className="mt-2 font-display text-lg font-semibold text-white">
+                    <Link href={`/portfolio/${c.slug}/`} className="after:absolute after:inset-0 after:content-['']">{c.title} projects</Link>
+                  </p>
                   <p className="mt-2 text-sm text-white/55">{c.tagline}</p>
-                </Link>
+                </div>
               </Spotlight>
             </Parallax>
           ))}
