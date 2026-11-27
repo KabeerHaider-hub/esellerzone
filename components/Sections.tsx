@@ -88,14 +88,14 @@ export function ProcessSteps({ steps }: { steps: string[] }) {
     <div className="mt-14"><ScrollLine>
     <ol className="relative grid gap-5 md:grid-cols-5">
       {steps.map((step, i) => (
-        <Reveal key={step} delay={i * 0.08}>
-          <li className="relative">
+        <li key={step} className="relative">
+          <Reveal delay={i * 0.08}>
             <div className="relative z-10 grid h-14 w-14 place-items-center rounded-2xl border border-brand-500/40 bg-ink-900 font-display text-lg font-semibold text-brand-400 shadow-[0_0_30px_-8px_rgba(255,89,13,0.7)]">
               {String(i + 1).padStart(2, "0")}
             </div>
             <p className="mt-5 font-medium text-white">{step}</p>
-          </li>
-        </Reveal>
+          </Reveal>
+        </li>
       ))}
     </ol>
     </ScrollLine></div>

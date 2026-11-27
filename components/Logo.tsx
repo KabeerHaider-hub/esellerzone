@@ -2,9 +2,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useHomeHref } from "./useHomeHref";
-import icon from "@/public/brand/logo-icon.png";
-import lockup from "@/public/brand/logo-lockup.png";
-import stacked from "@/public/brand/logo-stacked.png";
+import icon from "@/public/brand/logo-icon-sm.webp";
+import lockup from "@/public/brand/logo-lockup-sm.webp";
+import stacked from "@/public/brand/logo-stacked-sm.webp";
 
 /** Official eSeller Zone "e" mark (no wordmark). */
 export function LogoMark({ className = "h-9 w-auto" }: { className?: string }) {

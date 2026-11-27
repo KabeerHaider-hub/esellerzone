@@ -148,7 +148,8 @@ export function SplitReveal({ text, className = "", delay = 0, accentFrom }: { t
   };
   let idx = 0;
   return (
-    <motion.span className={className} aria-label={text} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+    <motion.span className={className} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+      <span className="sr-only">{text}</span>
       {words.map((w, wi) => {
         const accent = accentFrom !== undefined && wi >= accentFrom;
         return (
